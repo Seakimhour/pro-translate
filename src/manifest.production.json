@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Pro Translate",
+    "description": "Temp",
+    "version": "0.0.1",
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "/content.js"
+            ]
+        }
+    ]
+}
