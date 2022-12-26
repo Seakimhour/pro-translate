@@ -11,4 +11,20 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  build: {
+    minify: false,
+    assetsDir: "./",
+    rollupOptions: {
+      external: ["vue/dist/vue.global.prod.js"],
+      input: {
+        content: "./src/content/content.js",
+      },
+      output: {
+        entryFileNames: "[name].js",
+        globals: {
+          Vue: "vue/dist/vue.global.prod.js"
+        }
+      },
+    },
+  },
 });
