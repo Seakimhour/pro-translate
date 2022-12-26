@@ -1,37 +1,51 @@
-import { createApp } from 'vue'
-import App from '../view/popup.vue'
-console.log('hello world content todo something~')
+import { createApp } from "vue";
+import ProTranslate from "../view/popup/ProTranslate.vue";
 
-const init = async () => {
-  document.body.insertAdjacentHTML("beforeend", `<div id="pro-translate"></div>`);
-  document.addEventListener("mouseup", handleMouseUp);
+console.log("hello world content todo something~3");
+
+const init = () => {
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `<div id="pro-translate"></div>`
+  );
+  document.addEventListener("mouseup", mouseUpHandler);
 };
 
-const handleMouseUp = async e => {
+const mouseUpHandler = (mouseEvent) => {
+  if (stopCondition(mouseEvent)) return;
 
-  const isLeftClick = e.button === 0;
+  removePopup();
+
+  const selection = window.getSelection();
+  const selectedText = selection.toString();
+  if (selectedText.length === 0) return;
+
+  const selectedRect = selection.getRangeAt(0).getBoundingClientRect();
+  const clickedPosition = { x: mouseEvent.clientX, y: mouseEvent.clientY };
+  showPopup(selectedText, selectedRect, clickedPosition);
+};
+
+const stopCondition = (mouseEvent) => {
+  const isLeftClick = mouseEvent.button === 0;
   if (!isLeftClick) return;
 
-  const isInThisElement =
-    document.querySelector("#pro-translate") &&
-    document.querySelector("#pro-translate").contains(e.target);
-  if (isInThisElement) return;
-
-  const selection = window.getSelection()
-  const selectedText = selection.toString()
-  if (selectedText.length === 0) return;
-  const clickedPosition = { x: e.clientX, y: e.clientY };
-  const selectedPosition = selection.getRangeAt(0).getBoundingClientRect();
-  showPopup(selectedText, selectedPosition, clickedPosition);
+  const isInProTranslate =
+    document.querySelector("#pro-translate-popup") &&
+    document.querySelector("#pro-translate-popup").contains(mouseEvent.target);
+  if (isInProTranslate) return;
 };
 
-const showPopup = (
-  selectedText,
-  selectedPosition,
-  clickedPosition = null,
-  shouldTranslate = false
-) => {
-  createApp(App).mount('#pro-translate')
+const removePopup = () => {
+  const element = document.getElementById("pro-translate-popup");
+  if (element) element.parentNode.removeChild(element);
+};
+
+const showPopup = (selectedText, selectedRect, clickedPosition) => {
+  createApp(ProTranslate, {
+    selectedText,
+    selectedRect,
+    clickedPosition,
+  }).mount("#pro-translate");
 };
 
 init();
