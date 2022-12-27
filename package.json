@@ -7,7 +7,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development",
     "dev": "vite",
-    "css-watch": "tailwindcss -i ./src/assets/main.css -o ./dist/main.css --watch",
+    "css-watch": "tailwindcss -i ./src/assets/style.css -o ./public/style.css --watch",
     "preview": "vite preview"
   },
   "dependencies": {
