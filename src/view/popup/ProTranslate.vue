@@ -1,11 +1,19 @@
 <template>
-  <div id="pro-translate-popup">
+  <Transition name="fade">
     <TranslateButton
       v-if="!showTranslatePanel"
-      @click="showTranslatePanel = true"
+      :clickedPosition="clickedPosition"
+      :selectedDirection="selectedDirection"
+      @translate="showTranslatePanel = true"
     />
-    <TranslatePanel v-else :selectedText="selectedText" />
-  </div>
+    <TranslatePanel
+      v-else
+      :clickedPosition="clickedPosition"
+      :selectedRect="selectedRect"
+      :selectedDirection="selectedDirection"
+      :selectedText="selectedText"
+    />
+  </Transition>
 </template>
 
 <script>
@@ -17,14 +25,23 @@ export default {
     TranslateButton,
     TranslatePanel,
   },
-  props: ["selectedText", "selectedRect", "clickedPosition"],
+  props: [
+    "selectedText",
+    "selectedRect",
+    "clickedPosition",
+    "selectedDirection",
+  ],
   data() {
     return {
       showTranslatePanel: false,
     };
   },
   mounted() {
-    console.log(this.selectedText, this.selectedRect, this.clickedPosition);
+    console.log(this.selectedText);
+    console.log(this.selectedRect);
+    console.log(this.clickedPosition);
+    console.log(this.selectedDirection);
+    console.log(window.innerHeight, window.innerWidth);
   },
 };
 </script>

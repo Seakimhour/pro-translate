@@ -22,12 +22,18 @@
             ],
             "js": [
                 "content.js"
-            ],
-            "css": [
-                "main.css"
             ]
         }
     ],
+    "web_accessible_resources": [
+        {
+          "resources": [
+            "icons/450.png"
+        ],
+          "matches": [
+            "<all_urls>"
+        ]
+    }],
     "action": {
         "default_icon": {
             "16": "icons/16.png",
