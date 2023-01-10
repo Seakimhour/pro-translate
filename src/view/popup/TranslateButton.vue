@@ -4,7 +4,7 @@
     :style="buttonPosition"
     @click="$emit('translate')"
   >
-    <img class="rounded" :src="iconPath" />
+    <img class="block h-auto max-w-full rounded" :src="iconPath" />
   </div>
 </template>
 
@@ -35,3 +35,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+</style>

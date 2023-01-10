@@ -21,11 +21,11 @@
     </div>
     <div class="flex flex-row items-center justify-between">
       <input
-        class="h-8 w-full rounded-l border border-r-0 border-gray-500 bg-gray-200 px-2 text-sm focus:outline-none"
+        class="h-8 w-full rounded-l bg-gray-200 px-2 text-sm focus:outline-none"
         :value="formatedText"
       />
       <div
-        class="flex h-8 cursor-pointer select-none items-center rounded-r border border-gray-500 bg-gray-200 px-2 pb-0.5 text-xs active:bg-gray-300"
+        class="flex h-8 cursor-pointer select-none items-center rounded-r border border-gray-500 bg-gray-600 px-2 pb-0.5 text-xs text-white active:border-white"
         @click="copyToClipboard(formatedText)"
       >
         Copy
@@ -149,6 +149,23 @@ export default {
     copyToClipboard(text) {
       navigator.clipboard.writeText(text);
     },
+    horizontalScroll() {
+      const scrollbar = document.getElementsByClassName(
+        "pro-translate-scrollbar-y-xs"
+      )[0];
+      scrollbar.addEventListener("wheel", function (e) {
+        if (e.deltaY > 0) {
+          scrollbar.scrollLeft += 50;
+          e.preventDefault();
+        } else {
+          scrollbar.scrollLeft -= 50;
+          e.preventDefault();
+        }
+      });
+    },
+  },
+  mounted() {
+    this.horizontalScroll();
   },
 };
 </script>
@@ -165,5 +182,28 @@ export default {
 .pro-translate-scrollbar-y-xs::-webkit-scrollbar-thumb {
   border-radius: 99px;
   background-color: rgb(209 213 219);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
+input {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
 }
 </style>
