@@ -29,7 +29,7 @@
     "web_accessible_resources": [
         {
           "resources": [
-            "icons/450.png"
+            "icons/128.png"
         ],
           "matches": [
             "<all_urls>"
