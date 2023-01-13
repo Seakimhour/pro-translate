@@ -9,6 +9,10 @@ module.exports = {
     "@vue/eslint-config-prettier",
     "plugin:tailwindcss/recommended",
   ],
+  rules: {
+    "vue/multi-word-component-names": 0,
+    "tailwindcss/no-custom-classname": 0,
+  },
   parserOptions: {
     ecmaVersion: "latest",
   },
