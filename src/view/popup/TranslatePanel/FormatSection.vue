@@ -2,7 +2,6 @@
 <template>
   <div class="space-y-1 text-left">
     <p class="text-xs text-gray-400">Formated Text</p>
-    <div></div>
     <div
       class="pro-translate-scrollbar-y-xs flex select-none flex-row space-x-1 overflow-auto pb-1 text-xs"
     >
