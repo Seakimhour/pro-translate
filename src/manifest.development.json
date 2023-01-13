@@ -35,6 +35,7 @@
             "<all_urls>"
         ]
     }],
+    "options_page": "options.html",
     "action": {
         "default_icon": {
             "16": "icons/16.png",
