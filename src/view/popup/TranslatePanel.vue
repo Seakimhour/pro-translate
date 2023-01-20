@@ -49,11 +49,9 @@ export default {
 
       const detectedLanguage = await detectLanguage(this.selectedText);
 
-      if (detectedLanguage.isReliable)
-        this.sourceLanguage = detectedLanguage.languages[0].language;
+      this.sourceLanguage = detectedLanguage.languages[0].language;
 
       const matchTargetLanguage =
-        detectedLanguage.isReliable &&
         detectedLanguage.languages[0].language === this.targetLanguage;
 
       if (matchTargetLanguage && this.settingData.autoSwitch)
@@ -61,6 +59,31 @@ export default {
 
       await this.getTranslateText();
       this.getFormatText(detectedLanguage.languages[0].language);
+    },
+    async getTranslateText() {
+      const response = await translateAPI(
+        this.selectedText,
+        this.sourceLanguage,
+        this.targetLanguage
+      );
+
+      this.translatedText = response[0][0][0];
+    },
+    async getFormatText(detectedLanguage) {
+      console.log(this.targetLanguage, detectedLanguage, this.selectedText);
+      if (this.targetLanguage === "en") {
+        this.formatText = this.translatedText;
+      } else if (detectedLanguage === "en") {
+        this.formatText = this.selectedText;
+      } else {
+        const response = await translateAPI(
+          this.selectedText,
+          this.sourceLanguage,
+          "en"
+        );
+
+        this.formatText = response[0][0][0];
+      }
     },
     setPanelPosition(size, position, offset, direction) {
       this.panelPosition = {
@@ -90,31 +113,6 @@ export default {
           this.offset.width = right - window.innerWidth;
         if (bottom > window.innerHeight)
           this.offset.height = bottom - window.innerHeight;
-      }
-    },
-    async getTranslateText() {
-      const response = await translateAPI(
-        this.selectedText,
-        this.sourceLanguage,
-        this.targetLanguage
-      );
-
-      this.translatedText = response[0][0][0];
-    },
-    async getFormatText(detectedLanguage) {
-      console.log(this.targetLanguage, detectedLanguage, this.selectedText);
-      if (this.targetLanguage === "en") {
-        this.formatText = this.translatedText;
-      } else if (detectedLanguage === "en") {
-        this.formatText = this.selectedText;
-      } else {
-        const response = await translateAPI(
-          this.selectedText,
-          this.sourceLanguage,
-          "en"
-        );
-
-        this.formatText = response[0][0][0];
       }
     },
   },
