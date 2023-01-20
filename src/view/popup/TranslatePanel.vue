@@ -1,7 +1,7 @@
 <template>
   <div
     id="p-t-t-p"
-    class="absolute max-w-sm space-y-2 rounded border bg-white p-4 shadow"
+    class="absolute max-w-sm space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
     :style="panelPosition"
   >
     <div class="text-left">
@@ -12,12 +12,13 @@
       <p class="text-xs text-gray-400">Translated Text</p>
       <p>{{ translatedText }}</p>
     </div>
-    <FormatSection v-if="translatedText" :translatedText="translatedText" />
+    <FormatSection v-if="formatText" :text="formatText" />
   </div>
 </template>
 
 <script>
 import FormatSection from "./TranslatePanel/FormatSection.vue";
+import { translateAPI, detectLanguage } from "../../assets/translate.js";
 
 export default {
   components: {
@@ -28,40 +29,40 @@ export default {
     "clickedPosition",
     "selectedPosition",
     "selectedDirection",
+    "settingData",
   ],
   data() {
     return {
       translatedText: "",
-      buttonSize: {
-        height: 20,
-        width: 26,
-      },
-      panelSize: {
-        height: 0,
-        width: 0,
-      },
-      offset: {
-        height: 0,
-        width: 0,
-      },
-      panelPosition: {
-        top: 0,
-        left: 0,
-      },
+      sourceLanguage: "auto",
+      targetLanguage: "",
+      formatText: "",
+      buttonSize: { height: 20, width: 26 },
+      panelSize: { height: 0, width: 0 },
+      offset: { height: 0, width: 0 },
+      panelPosition: { top: 0, left: 0 },
     };
   },
   methods: {
-    translate(text, sourceLanguage, targetLanguage) {
-      fetch(
-        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLanguage}&tl=${targetLanguage}&dt=t&q=${encodeURI(
-          text
-        )}`
-      )
-        .then((response) => response.json())
-        .then((result) => (this.translatedText = result[0][0][0]));
+    async initLanguage() {
+      this.targetLanguage = this.settingData.targetLanguage.code;
+
+      const detectedLanguage = await detectLanguage(this.selectedText);
+
+      if (detectedLanguage.isReliable)
+        this.sourceLanguage = detectedLanguage.languages[0].language;
+
+      const matchTargetLanguage =
+        detectedLanguage.isReliable &&
+        detectedLanguage.languages[0].language === this.targetLanguage;
+
+      if (matchTargetLanguage && this.settingData.autoSwitch)
+        this.targetLanguage = this.settingData.secondTargetLanguage.code;
+
+      await this.getTranslateText();
+      this.getFormatText(detectedLanguage.languages[0].language);
     },
     setPanelPosition(size, position, offset, direction) {
-      console.log(offset);
       this.panelPosition = {
         top:
           direction === "left"
@@ -91,12 +92,35 @@ export default {
           this.offset.height = bottom - window.innerHeight;
       }
     },
+    async getTranslateText() {
+      const response = await translateAPI(
+        this.selectedText,
+        this.sourceLanguage,
+        this.targetLanguage
+      );
+
+      this.translatedText = response[0][0][0];
+    },
+    async getFormatText(detectedLanguage) {
+      console.log(this.targetLanguage, detectedLanguage, this.selectedText);
+      if (this.targetLanguage === "en") {
+        this.formatText = this.translatedText;
+      } else if (detectedLanguage === "en") {
+        this.formatText = this.selectedText;
+      } else {
+        const response = await translateAPI(
+          this.selectedText,
+          this.sourceLanguage,
+          "en"
+        );
+
+        this.formatText = response[0][0][0];
+      }
+    },
   },
   mounted() {
     const translationPanel = document.getElementById("p-t-t-p");
     translationPanel.style.width = translationPanel.offsetWidth + 70 + "px";
-
-    this.translate(this.selectedText, "auto", "en");
 
     this.panelSize = {
       height: translationPanel.offsetHeight,
@@ -116,11 +140,22 @@ export default {
       this.offset,
       this.selectedDirection
     );
+
+    this.initLanguage();
   },
 };
 </script>
 
 <style scoped>
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
 p {
   margin: 0;
 }
