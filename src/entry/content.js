@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import ProTranslate from "../view/popup/ProTranslate.vue";
 import "/public/style.css";
-console.log("hello world content todo something~3");
+
 let prevSelectedText = "";
 
 const init = () => {
