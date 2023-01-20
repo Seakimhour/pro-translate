@@ -1,99 +1,101 @@
 <template>
-  <div class="flex flex-col border-b-2 border-primary/20 py-2">
-    <SettingOption
-      :label="'Target Language'"
-      :description="'Select the default target language.'"
-    >
-      <Dropdown :value="settingData.target_language">
-        <div
-          v-for="language in languages"
-          :key="language.code"
-          @click="settingData.target_language = language.country"
-          class="cursor-pointer px-2 text-sm hover:text-primary"
-        >
-          {{ language.country }}
-        </div>
-      </Dropdown>
-    </SettingOption>
-    <SettingOption
-      :label="'Second Target Language'"
-      :description="'Select the default second target language.'"
-    >
-      <Dropdown :value="settingData.second_target_language">
-        <div
-          v-for="language in languages"
-          :key="language.code"
-          @click="settingData.second_target_language = language.country"
-          class="cursor-pointer px-2 text-sm hover:text-primary"
-        >
-          {{ language.country }}
-        </div>
-      </Dropdown>
-    </SettingOption>
-    <SettingOption
-      :label="'Automatically switch to the second target language'"
-      :description="'When the selected text is the default target language, translate it to second target language'"
-    >
-      <input
-        type="checkbox"
-        v-model="settingData.auto_switch"
-        class="rounded border-gray-300 p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
-      />
-    </SettingOption>
-  </div>
-  <div class="flex flex-col border-b-2 border-primary/20 py-2">
-    <SettingOption
-      :label="'Target Format'"
-      :description="'Select the default target format, format can be change in translation panel.'"
-    >
-      <Dropdown :value="settingData.target_format">
-        <div
-          v-for="formatCase in formatCases"
-          :key="formatCase.name"
-          @click="settingData.target_format = formatCase.name"
-          class="cursor-pointer px-2 text-sm hover:text-primary"
-        >
-          {{ formatCase.name }}
-        </div>
-      </Dropdown>
-    </SettingOption>
-    <SettingOption
-      :label="'Automatically set default format'"
-      :description="'When change format in translation panel, set the selected format to default format.'"
-    >
-      <input
-        type="checkbox"
-        v-model="settingData.auto_set_format"
-        class="rounded border-gray-300 p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
-      />
-    </SettingOption>
-    <CaseList :formatCases="formatCases" />
-  </div>
-  <div class="flex flex-col py-2">
-    <SettingOption
-      :label="'Show translation icon'"
-      :description="'When select text an icon will popup that popup translation penal when click.'"
-    >
-      <input
-        type="radio"
-        name="show_icon"
-        :value="true"
-        v-model="settingData.show_icon"
-        class="cursor-pointer p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
-      />
-    </SettingOption>
-    <SettingOption
-      :label="'Don\'t show icon'"
-      :description="'Will not show icon when select text but you can still translate by clicking the Pro Translate icon in toolbar.'"
-    >
-      <input
-        type="radio"
-        name="show_icon"
-        :value="false"
-        v-model="settingData.show_icon"
-        class="cursor-pointer p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
-      />
-    </SettingOption>
+  <div v-if="settingData">
+    <div class="flex flex-col border-b-2 border-primary/20 py-2">
+      <SettingOption
+        :label="'Target Language'"
+        :description="'Select the default target language'"
+      >
+        <Dropdown :value="settingData.targetLanguage.country">
+          <div
+            v-for="language in languages"
+            :key="language.code"
+            @click="settingData.targetLanguage = language"
+            class="cursor-pointer px-2 text-sm hover:text-primary"
+          >
+            {{ language.country }}
+          </div>
+        </Dropdown>
+      </SettingOption>
+      <SettingOption
+        :label="'Automatically switch to the second target language'"
+        :description="'When the selected text is the default target language, translate it to second target language'"
+      >
+        <input
+          type="checkbox"
+          v-model="settingData.autoSwitch"
+          class="rounded border-gray-300 p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
+        />
+      </SettingOption>
+      <SettingOption
+        :label="'Second Target Language'"
+        :description="'Select the default second target language'"
+      >
+        <Dropdown :value="settingData.secondTargetLanguage.country">
+          <div
+            v-for="language in languages"
+            :key="language.code"
+            @click="settingData.secondTargetLanguage = language"
+            class="cursor-pointer px-2 text-sm hover:text-primary"
+          >
+            {{ language.country }}
+          </div>
+        </Dropdown>
+      </SettingOption>
+    </div>
+    <div class="flex flex-col border-b-2 border-primary/20 py-2">
+      <SettingOption
+        :label="'Target Format'"
+        :description="'Select the default target format, format can be change in translation panel'"
+      >
+        <Dropdown :value="settingData.targetFormat">
+          <div
+            v-for="formatCase in formatCases"
+            :key="formatCase.name"
+            @click="settingData.targetFormat = formatCase.name"
+            class="cursor-pointer px-2 text-sm hover:text-primary"
+          >
+            {{ formatCase.name }}
+          </div>
+        </Dropdown>
+      </SettingOption>
+      <SettingOption
+        :label="'Automatically set default format'"
+        :description="'When change format in translation panel, set the selected format to default format'"
+      >
+        <input
+          type="checkbox"
+          v-model="settingData.autoSetFormat"
+          class="rounded border-gray-300 p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
+        />
+      </SettingOption>
+      <CaseList :formatCases="formatCases" />
+    </div>
+    <div class="flex flex-col py-2">
+      <SettingOption
+        :label="'Show translation icon'"
+        :description="'When select text an icon will popup that popup translation penal when click'"
+      >
+        <input
+          type="radio"
+          name="showicon"
+          :value="true"
+          v-model="settingData.showicon"
+          class="cursor-pointer p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
+        />
+      </SettingOption>
+      <SettingOption
+        :label="'Don\'t show icon'"
+        :description="'Will not show icon when select text but you can still translate by clicking the Pro Translate icon in toolbar'"
+      >
+        <input
+          type="radio"
+          name="showIcon"
+          :value="false"
+          v-model="settingData.showIcon"
+          class="cursor-pointer p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
+        />
+      </SettingOption>
+    </div>
   </div>
 </template>
 
@@ -101,6 +103,9 @@
 import SettingOption from "./components/Option.vue";
 import CaseList from "./components/CaseList.vue";
 import Dropdown from "./components/Dropdown.vue";
+import { getSettings, setSettings } from "../../assets/settings.js";
+import { formatCases } from "../../assets/format-cases.js";
+import { languages } from "../../assets/languages.js";
 
 export default {
   components: {
@@ -110,234 +115,33 @@ export default {
   },
   data() {
     return {
-      formatCases: [
-        {
-          name: "snake",
-          example: "test_string",
-          discription:
-            "Transform into a lower case string with underscores between words.",
-        },
-        {
-          name: "param",
-          example: "test-string",
-          discription:
-            "Transform into a lower cased string with dashes between words.",
-        },
-        {
-          name: "camel",
-          example: "testString",
-          discription:
-            "Transform into a string with the separator denoted by the next word capitalized.",
-        },
-        {
-          name: "pascal",
-          example: "TestString",
-          discription:
-            "Transform into a string of capitalized words without separators.",
-        },
-        {
-          name: "path",
-          example: "test/string",
-          discription:
-            "Transform into a lower case string with slashes between words.",
-        },
-        {
-          name: "constant",
-          example: "TEST_STRING",
-          discription:
-            "Transform into upper case string with an underscore between words.",
-        },
-        {
-          name: "dot",
-          example: "test.string",
-          discription:
-            "Transform into a lower case string with a period between words.",
-        },
-        {
-          name: "header",
-          example: "Test-String",
-          discription:
-            "Transform into a dash separated string of capitalized words.",
-        },
-        {
-          name: "lower",
-          example: "test string",
-          discription:
-            "Transform into a lower cased string with spaces between words.",
-        },
-        {
-          name: "capital",
-          example: "Test String",
-          discription:
-            "Transform into a space separated string with each word capitalized.",
-        },
-      ],
-      languages: [
-        { code: "af", country: "Afrikaans" },
-        { code: "sq", country: "Albanian" },
-        { code: "am", country: "Amharic" },
-        { code: "ar", country: "Arabic" },
-        { code: "hy", country: "Armenian" },
-        { code: "as", country: "Assamese" },
-        { code: "ay", country: "Aymara" },
-        { code: "az", country: "Azerbaijani" },
-        { code: "bm", country: "Bambara" },
-        { code: "eu", country: "Basque" },
-        { code: "be", country: "Belarusian" },
-        { code: "bn", country: "Bengali" },
-        { code: "bho", country: "Bhojpuri" },
-        { code: "bs", country: "Bosnian" },
-        { code: "bg", country: "Bulgarian" },
-        { code: "ca", country: "Catalan" },
-        { code: "ceb", country: "Cebuano" },
-        { code: "ny", country: "Chichewa" },
-        { code: "zh-CN", country: "Chinese (Simplified)" },
-        { code: "zh-TW", country: "Chinese (Traditional)" },
-        { code: "co", country: "Corsican" },
-        { code: "hr", country: "Croatian" },
-        { code: "cs", country: "Czech" },
-        { code: "da", country: "Danish" },
-        { code: "dv", country: "Dhivehi" },
-        { code: "doi", country: "Dogri" },
-        { code: "nl", country: "Dutch" },
-        { code: "en", country: "English" },
-        { code: "eo", country: "Esperanto" },
-        { code: "et", country: "Estonian" },
-        { code: "ee", country: "Ewe" },
-        { code: "tl", country: "Filipino" },
-        { code: "fi", country: "Finnish" },
-        { code: "fr", country: "French" },
-        { code: "fy", country: "Frisian" },
-        { code: "gl", country: "Galician" },
-        { code: "ka", country: "Georgian" },
-        { code: "de", country: "German" },
-        { code: "el", country: "Greek" },
-        { code: "gn", country: "Guarani" },
-        { code: "gu", country: "Gujarati" },
-        { code: "ht", country: "Haitian Creole" },
-        { code: "ha", country: "Hausa" },
-        { code: "haw", country: "Hawaiian" },
-        { code: "iw", country: "Hebrew" },
-        { code: "hi", country: "Hindi" },
-        { code: "hmn", country: "Hmong" },
-        { code: "hu", country: "Hungarian" },
-        { code: "is", country: "Icelandic" },
-        { code: "ig", country: "Igbo" },
-        { code: "ilo", country: "Ilocano" },
-        { code: "id", country: "Indonesian" },
-        { code: "ga", country: "Irish" },
-        { code: "it", country: "Italian" },
-        { code: "ja", country: "Japanese" },
-        { code: "jw", country: "Javanese" },
-        { code: "kn", country: "Kannada" },
-        { code: "kk", country: "Kazakh" },
-        { code: "km", country: "Khmer" },
-        { code: "rw", country: "Kinyarwanda" },
-        { code: "gom", country: "Konkani" },
-        { code: "ko", country: "Korean" },
-        { code: "kri", country: "Krio" },
-        { code: "ku", country: "Kurdish (Kurmanji)" },
-        { code: "ckb", country: "Kurdish (Sorani)" },
-        { code: "ky", country: "Kyrgyz" },
-        { code: "lo", country: "Lao" },
-        { code: "la", country: "Latin" },
-        { code: "lv", country: "Latvian" },
-        { code: "ln", country: "Lingala" },
-        { code: "lt", country: "Lithuanian" },
-        { code: "lg", country: "Luganda" },
-        { code: "lb", country: "Luxembourgish" },
-        { code: "mk", country: "Macedonian" },
-        { code: "mai", country: "Maithili" },
-        { code: "mg", country: "Malagasy" },
-        { code: "ms", country: "Malay" },
-        { code: "ml", country: "Malayalam" },
-        { code: "mt", country: "Maltese" },
-        { code: "mi", country: "Maori" },
-        { code: "mr", country: "Marathi" },
-        { code: "mni-Mtei", country: "Meiteilon (Manipuri)" },
-        { code: "lus", country: "Mizo" },
-        { code: "mn", country: "Mongolian" },
-        { code: "my", country: "Myanmar (Burmese)" },
-        { code: "ne", country: "Nepali" },
-        { code: "no", country: "Norwegian" },
-        { code: "or", country: "Odia (Oriya)" },
-        { code: "om", country: "Oromo" },
-        { code: "ps", country: "Pashto" },
-        { code: "fa", country: "Persian" },
-        { code: "pl", country: "Polish" },
-        { code: "pt", country: "Portuguese" },
-        { code: "pa", country: "Punjabi" },
-        { code: "qu", country: "Quechua" },
-        { code: "ro", country: "Romanian" },
-        { code: "ru", country: "Russian" },
-        { code: "sm", country: "Samoan" },
-        { code: "sa", country: "Sanskrit" },
-        { code: "gd", country: "Scots Gaelic" },
-        { code: "nso", country: "Sepedi" },
-        { code: "sr", country: "Serbian" },
-        { code: "st", country: "Sesotho" },
-        { code: "sn", country: "Shona" },
-        { code: "sd", country: "Sindhi" },
-        { code: "si", country: "Sinhala" },
-        { code: "sk", country: "Slovak" },
-        { code: "sl", country: "Slovenian" },
-        { code: "so", country: "Somali" },
-        { code: "es", country: "Spanish" },
-        { code: "su", country: "Sundanese" },
-        { code: "sw", country: "Swahili" },
-        { code: "sv", country: "Swedish" },
-        { code: "tg", country: "Tajik" },
-        { code: "ta", country: "Tamil" },
-        { code: "tt", country: "Tatar" },
-        { code: "te", country: "Telugu" },
-        { code: "th", country: "Thai" },
-        { code: "ti", country: "Tigrinya" },
-        { code: "ts", country: "Tsonga" },
-        { code: "tr", country: "Turkish" },
-        { code: "tk", country: "Turkmen" },
-        { code: "ak", country: "Twi" },
-        { code: "uk", country: "Ukrainian" },
-        { code: "ur", country: "Urdu" },
-        { code: "ug", country: "Uyghur" },
-        { code: "uz", country: "Uzbek" },
-        { code: "vi", country: "Vietnamese" },
-        { code: "cy", country: "Welsh" },
-        { code: "xh", country: "Xhosa" },
-        { code: "yi", country: "Yiddish" },
-        { code: "yo", country: "Yoruba" },
-        { code: "zu", country: "Zulu" },
-      ],
-      settingData: {
-        target_language: "English",
-        second_target_language: "Japan",
-        auto_switch: true,
-        target_format: "camel",
-        auto_set_format: true,
-        show_icon: true,
-      },
+      formatCases: [],
+      languages: [],
+      settingData: null,
     };
   },
   watch: {
     settingData: {
-      handler() {
-        localStorage.setItem("SETTING_DATA", JSON.stringify(this.settingData));
+      async handler() {
+        await setSettings(this.settingData);
       },
       deep: true,
     },
   },
   methods: {
-    getUserSetting() {
-      const SETTING_DATA = JSON.parse(localStorage.getItem("SETTING_DATA"));
-      if (SETTING_DATA) {
-        this.settingData = SETTING_DATA;
+    async initSetting() {
+      const settingData = await getSettings();
+      if (settingData) {
+        this.settingData = settingData;
       } else {
-        this.settingData.case_list = this.formatCases.map((c) => c.name);
-        localStorage.setItem("SETTING_DATA", JSON.stringify(this.settingData));
+        await setSettings(this.settingData);
       }
     },
   },
-  mounted() {
-    this.getUserSetting();
+  created() {
+    this.initSetting();
+    this.formatCases = formatCases;
+    this.languages = languages;
   },
 };
 </script>

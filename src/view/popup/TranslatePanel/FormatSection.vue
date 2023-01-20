@@ -1,4 +1,3 @@
-<!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
   <div class="space-y-1 text-left">
     <p class="text-xs text-gray-400">Formated Text</p>
@@ -35,85 +34,19 @@
 
 <script>
 import * as changeCase from "change-case";
+import { formatCases } from "../../../assets/format-cases";
 
 export default {
-  props: ["translatedText"],
+  props: ["text"],
   data() {
     return {
       selectedCase: "camel",
-      formatCases: [
-        {
-          name: "camel",
-          example: "testString",
-          discription:
-            "Transform into a string with the separator denoted by the next word capitalized.",
-        },
-        {
-          name: "capital",
-          example: "Test String",
-          discription:
-            "Transform into a space separated string with each word capitalized.",
-        },
-        {
-          name: "constant",
-          example: "TEST_STRING",
-          discription:
-            "Transform into upper case string with an underscore between words.",
-        },
-        {
-          name: "dot",
-          example: "test.string",
-          discription:
-            "Transform into a lower case string with a period between words.",
-        },
-        {
-          name: "header",
-          example: "Test-String",
-          discription:
-            "Transform into a dash separated string of capitalized words.",
-        },
-        {
-          name: "lower",
-          example: "test string",
-          discription:
-            "Transform into a lower cased string with spaces between words.",
-        },
-        {
-          name: "param",
-          example: "test-string",
-          discription:
-            "Transform into a lower cased string with dashes between words.",
-        },
-        {
-          name: "pascal",
-          example: "TestString",
-          discription:
-            "Transform into a string of capitalized words without separators.",
-        },
-        {
-          name: "path",
-          example: "test/string",
-          discription:
-            "Transform into a lower case string with slashes between words.",
-        },
-        {
-          name: "sentence",
-          example: "Test string",
-          discription:
-            "Transform into a lower case with spaces between words, then capitalize the string.",
-        },
-        {
-          name: "snake",
-          example: "test_string",
-          discription:
-            "Transform into a lower case string with underscores between words.",
-        },
-      ],
+      formatCases: [],
     };
   },
   computed: {
     formatedText() {
-      return this.format(this.translatedText, this.selectedCase);
+      return this.format(this.text, this.selectedCase);
     },
   },
   methods: {
@@ -165,6 +98,9 @@ export default {
   },
   mounted() {
     this.horizontalScroll();
+  },
+  created() {
+    this.formatCases = formatCases;
   },
 };
 </script>
