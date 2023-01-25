@@ -12,13 +12,20 @@
       <p class="text-xs text-gray-400">Translated Text</p>
       <p>{{ translatedText }}</p>
     </div>
-    <FormatSection v-if="formatText" :text="formatText" />
+    <FormatSection
+      v-if="formatText"
+      :text="formatText"
+      :settings="settings"
+      :cases="cases"
+      @updateTargetFormat="updateTargetFormat"
+    />
   </div>
 </template>
 
 <script>
 import FormatSection from "./TranslatePanel/FormatSection.vue";
 import { translateAPI, detectLanguage } from "../../assets/translate.js";
+import { getSettings, getCases, setSettings } from "../../assets/settings.js";
 
 export default {
   components: {
@@ -29,7 +36,6 @@ export default {
     "clickedPosition",
     "selectedPosition",
     "selectedDirection",
-    "settingData",
   ],
   data() {
     return {
@@ -37,6 +43,8 @@ export default {
       sourceLanguage: "auto",
       targetLanguage: "",
       formatText: "",
+      settings: null,
+      cases: null,
       buttonSize: { height: 20, width: 26 },
       panelSize: { height: 0, width: 0 },
       offset: { height: 0, width: 0 },
@@ -44,23 +52,26 @@ export default {
     };
   },
   methods: {
-    async initLanguage() {
-      this.targetLanguage = this.settingData.targetLanguage.code;
+    async initialize() {
+      this.settings = await getSettings();
+      this.cases = await getCases();
+
+      this.initPanel();
+      await this.translate();
+      await this.initFormat();
+    },
+    async translate() {
+      this.targetLanguage = this.settings.targetLanguage.code;
 
       const detectedLanguage = await detectLanguage(this.selectedText);
 
       this.sourceLanguage = detectedLanguage.languages[0].language;
 
-      const matchTargetLanguage =
-        detectedLanguage.languages[0].language === this.targetLanguage;
+      const matchTargetLanguage = this.sourceLanguage === this.targetLanguage;
 
-      if (matchTargetLanguage && this.settingData.autoSwitch)
-        this.targetLanguage = this.settingData.secondTargetLanguage.code;
+      if (matchTargetLanguage && this.settings.autoSwitch)
+        this.targetLanguage = this.settings.secondTargetLanguage.code;
 
-      await this.getTranslateText();
-      this.getFormatText(detectedLanguage.languages[0].language);
-    },
-    async getTranslateText() {
       const response = await translateAPI(
         this.selectedText,
         this.sourceLanguage,
@@ -69,11 +80,10 @@ export default {
 
       this.translatedText = response[0][0][0];
     },
-    async getFormatText(detectedLanguage) {
-      console.log(this.targetLanguage, detectedLanguage, this.selectedText);
+    async initFormat() {
       if (this.targetLanguage === "en") {
         this.formatText = this.translatedText;
-      } else if (detectedLanguage === "en") {
+      } else if (this.sourceLanguage === "en") {
         this.formatText = this.selectedText;
       } else {
         const response = await translateAPI(
@@ -81,9 +91,31 @@ export default {
           this.sourceLanguage,
           "en"
         );
-
         this.formatText = response[0][0][0];
       }
+    },
+    initPanel() {
+      const translationPanel = document.getElementById("p-t-t-p");
+      translationPanel.style.width = translationPanel.offsetWidth + 70 + "px";
+
+      this.panelSize = {
+        height: translationPanel.offsetHeight,
+        width: translationPanel.offsetWidth,
+      };
+
+      this.setOffset(
+        this.buttonSize,
+        this.panelSize,
+        this.selectedPosition,
+        this.selectedDirection
+      );
+
+      this.setPanelPosition(
+        this.buttonSize,
+        this.selectedPosition,
+        this.offset,
+        this.selectedDirection
+      );
     },
     setPanelPosition(size, position, offset, direction) {
       this.panelPosition = {
@@ -115,31 +147,13 @@ export default {
           this.offset.height = bottom - window.innerHeight;
       }
     },
+    async updateTargetFormat(targetFormat) {
+      this.settings.targetFormat = targetFormat;
+      await setSettings(this.settings);
+    },
   },
   mounted() {
-    const translationPanel = document.getElementById("p-t-t-p");
-    translationPanel.style.width = translationPanel.offsetWidth + 70 + "px";
-
-    this.panelSize = {
-      height: translationPanel.offsetHeight,
-      width: translationPanel.offsetWidth,
-    };
-
-    this.setOffset(
-      this.buttonSize,
-      this.panelSize,
-      this.selectedPosition,
-      this.selectedDirection
-    );
-
-    this.setPanelPosition(
-      this.buttonSize,
-      this.selectedPosition,
-      this.offset,
-      this.selectedDirection
-    );
-
-    this.initLanguage();
+    this.initialize();
   },
 };
 </script>

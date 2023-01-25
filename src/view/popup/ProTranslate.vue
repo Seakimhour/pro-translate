@@ -12,7 +12,6 @@
       :selectedPosition="selectedPosition"
       :selectedDirection="selectedDirection"
       :selectedText="selectedText"
-      :settingData="settingData"
     />
   </Transition>
 </template>
@@ -20,7 +19,6 @@
 <script>
 import TranslateButton from "./TranslateButton.vue";
 import TranslatePanel from "./TranslatePanel.vue";
-import { getSettings } from "../../assets/settings.js";
 
 export default {
   components: {
@@ -36,16 +34,7 @@ export default {
   data() {
     return {
       showTranslatePanel: false,
-      settingData: null,
     };
-  },
-  methods: {
-    async initSetting() {
-      this.settingData = await getSettings();
-    },
-  },
-  mounted() {
-    this.initSetting();
   },
 };
 </script>

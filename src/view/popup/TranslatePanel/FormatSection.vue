@@ -5,21 +5,21 @@
       class="pro-translate-scrollbar-y-xs flex select-none flex-row space-x-1 overflow-auto pb-1 text-xs"
     >
       <div
-        v-for="(formatCase, index) in formatCases"
+        v-for="(formatCase, index) in cases"
         :key="index"
         :class="
-          selectedCase === formatCase.name
+          targetFormat === formatCase
             ? 'cursor-pointer rounded-full bg-gray-600 px-2 pb-0.5 text-white'
             : 'cursor-pointer rounded-full bg-gray-200 px-2 pb-0.5 hover:bg-gray-400'
         "
-        @click="selectedCase = formatCase.name"
+        @click="changeCase(formatCase)"
       >
-        {{ formatCase.name }}
+        {{ formatCase }}
       </div>
     </div>
     <div class="flex flex-row items-center justify-between">
       <input
-        class="h-8 w-full rounded-l bg-gray-200 px-2 text-sm focus:outline-none"
+        class="h-8 w-full rounded-l bg-gray-200 px-2 text-xs focus:outline-none"
         :value="formatedText"
       />
       <div
@@ -34,24 +34,23 @@
 
 <script>
 import * as changeCase from "change-case";
-import { formatCases } from "../../../assets/format-cases";
 
 export default {
-  props: ["text"],
+  props: ["text", "settings", "cases"],
   data() {
     return {
-      selectedCase: "camel",
-      formatCases: [],
+      targetFormat: "",
     };
   },
   computed: {
     formatedText() {
-      return this.format(this.text, this.selectedCase);
+      return this.format(this.text, this.targetFormat);
     },
   },
   methods: {
-    format(text, formatCase) {
-      switch (formatCase) {
+    format(text, targetFormat) {
+      console.log(text, targetFormat);
+      switch (targetFormat) {
         case "camel":
           return changeCase.camelCase(text);
         case "capital":
@@ -78,6 +77,13 @@ export default {
           return "";
       }
     },
+    async changeCase(formatCase) {
+      this.targetFormat = formatCase;
+
+      if (this.settings.autoSetFormat) {
+        this.$emit("updateTargetFormat", this.targetFormat);
+      }
+    },
     copyToClipboard(text) {
       navigator.clipboard.writeText(text);
     },
@@ -100,7 +106,7 @@ export default {
     this.horizontalScroll();
   },
   created() {
-    this.formatCases = formatCases;
+    this.targetFormat = this.settings.targetFormat;
   },
 };
 </script>
