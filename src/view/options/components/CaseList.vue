@@ -52,7 +52,7 @@ export default {
     };
   },
   computed: {
-    caseList() {
+    cases() {
       return this.formatCases.map((c) => c.name);
     },
     orderedCases() {
@@ -60,7 +60,7 @@ export default {
       this.userCases.forEach((c) => {
         orderedCases.push(c);
       });
-      this.caseList.forEach((c) => {
+      this.cases.forEach((c) => {
         if (!orderedCases.includes(c)) orderedCases.push(c);
       });
       return orderedCases;
@@ -71,7 +71,7 @@ export default {
       this.userCases = Object.values(await getCases());
     },
     async selectCase(formatCase) {
-      const INDEX = this.caseList.indexOf(formatCase);
+      const INDEX = this.cases.indexOf(formatCase);
       this.selectedCase = this.formatCases[INDEX];
       if (this.userCases.includes(formatCase)) {
         this.userCases = this.userCases.filter((c) => c !== formatCase);

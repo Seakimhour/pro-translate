@@ -1,15 +1,15 @@
 <template>
-  <div v-if="settingData">
+  <div v-if="settings">
     <div class="flex flex-col border-b-2 border-primary/20 py-2">
       <SettingOption
         :label="'Target Language'"
         :description="'Select the default target language'"
       >
-        <Dropdown :value="settingData.targetLanguage.country">
+        <Dropdown :value="settings.targetLanguage.country">
           <div
             v-for="language in languages"
             :key="language.code"
-            @click="settingData.targetLanguage = language"
+            @click="settings.targetLanguage = language"
             class="cursor-pointer px-2 text-sm hover:text-primary"
           >
             {{ language.country }}
@@ -22,7 +22,7 @@
       >
         <input
           type="checkbox"
-          v-model="settingData.autoSwitch"
+          v-model="settings.autoSwitch"
           class="rounded border-gray-300 p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
         />
       </SettingOption>
@@ -30,11 +30,11 @@
         :label="'Second Target Language'"
         :description="'Select the default second target language'"
       >
-        <Dropdown :value="settingData.secondTargetLanguage.country">
+        <Dropdown :value="settings.secondTargetLanguage.country">
           <div
             v-for="language in languages"
             :key="language.code"
-            @click="settingData.secondTargetLanguage = language"
+            @click="settings.secondTargetLanguage = language"
             class="cursor-pointer px-2 text-sm hover:text-primary"
           >
             {{ language.country }}
@@ -47,11 +47,11 @@
         :label="'Target Format'"
         :description="'Select the default target format, format can be change in translation panel'"
       >
-        <Dropdown :value="settingData.targetFormat">
+        <Dropdown :value="settings.targetFormat">
           <div
             v-for="formatCase in formatCases"
             :key="formatCase.name"
-            @click="settingData.targetFormat = formatCase.name"
+            @click="settings.targetFormat = formatCase.name"
             class="cursor-pointer px-2 text-sm hover:text-primary"
           >
             {{ formatCase.name }}
@@ -64,7 +64,7 @@
       >
         <input
           type="checkbox"
-          v-model="settingData.autoSetFormat"
+          v-model="settings.autoSetFormat"
           class="rounded border-gray-300 p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
         />
       </SettingOption>
@@ -79,7 +79,7 @@
           type="radio"
           name="showicon"
           :value="true"
-          v-model="settingData.showIcon"
+          v-model="settings.showIcon"
           class="cursor-pointer p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
         />
       </SettingOption>
@@ -91,7 +91,7 @@
           type="radio"
           name="showIcon"
           :value="false"
-          v-model="settingData.showIcon"
+          v-model="settings.showIcon"
           class="cursor-pointer p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
         />
       </SettingOption>
@@ -117,20 +117,20 @@ export default {
     return {
       formatCases: [],
       languages: [],
-      settingData: null,
+      settings: null,
     };
   },
   watch: {
-    settingData: {
+    settings: {
       async handler() {
-        await setSettings(this.settingData);
+        await setSettings(this.settings);
       },
       deep: true,
     },
   },
   methods: {
     async initSetting() {
-      this.settingData = await getSettings();
+      this.settings = await getSettings();
     },
   },
   created() {
