@@ -14,7 +14,7 @@
           v-for="(formatCase, index) in orderedCases"
           :key="index"
           :class="
-            userCaseList.includes(formatCase)
+            userCases.includes(formatCase)
               ? 'cursor-pointer rounded-full bg-primary px-2 pb-0.5 text-white'
               : 'cursor-pointer rounded-full bg-gray-200 px-2 pb-0.5 hover:bg-primary/50'
           "
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { getCases, setCases } from "../../../assets/settings.js";
+
 export default {
   props: ["formatCases"],
   data() {
@@ -46,7 +48,7 @@ export default {
       selectedCase: {
         name: null,
       },
-      userCaseList: [],
+      userCases: [],
     };
   },
   computed: {
@@ -54,7 +56,10 @@ export default {
       return this.formatCases.map((c) => c.name);
     },
     orderedCases() {
-      let orderedCases = [...this.userCaseList];
+      let orderedCases = [];
+      this.userCases.forEach((c) => {
+        orderedCases.push(c);
+      });
       this.caseList.forEach((c) => {
         if (!orderedCases.includes(c)) orderedCases.push(c);
       });
@@ -62,28 +67,22 @@ export default {
     },
   },
   methods: {
-    getUserCaseList() {
-      const CASE_LIST = localStorage.getItem("CASE_LIST");
-      if (CASE_LIST) {
-        this.userCaseList = CASE_LIST.split(",");
-      } else {
-        localStorage.setItem("CASE_LIST", this.caseList);
-        this.userCaseList = this.caseList;
-      }
+    async getUserCases() {
+      this.userCases = Object.values(await getCases());
     },
-    selectCase(formatCase) {
+    async selectCase(formatCase) {
       const INDEX = this.caseList.indexOf(formatCase);
       this.selectedCase = this.formatCases[INDEX];
-      if (this.userCaseList.includes(formatCase)) {
-        this.userCaseList = this.userCaseList.filter((c) => c !== formatCase);
+      if (this.userCases.includes(formatCase)) {
+        this.userCases = this.userCases.filter((c) => c !== formatCase);
       } else {
-        this.userCaseList.unshift(formatCase);
+        this.userCases.unshift(formatCase);
       }
-      localStorage.setItem("CASE_LIST", this.userCaseList);
+      await setCases(this.userCases);
     },
   },
   mounted() {
-    this.getUserCaseList();
+    this.getUserCases();
   },
 };
 </script>

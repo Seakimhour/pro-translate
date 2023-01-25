@@ -79,7 +79,7 @@
           type="radio"
           name="showicon"
           :value="true"
-          v-model="settingData.showicon"
+          v-model="settingData.showIcon"
           class="cursor-pointer p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
         />
       </SettingOption>
@@ -130,12 +130,7 @@ export default {
   },
   methods: {
     async initSetting() {
-      const settingData = await getSettings();
-      if (settingData) {
-        this.settingData = settingData;
-      } else {
-        await setSettings(this.settingData);
-      }
+      this.settingData = await getSettings();
     },
   },
   created() {
