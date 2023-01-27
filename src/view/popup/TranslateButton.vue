@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute" :style="buttonPosition">
+  <div class="absolute z-[2147483647]" :style="buttonPosition">
     <img
       :src="iconPath"
       :style="imageSize"

@@ -1,7 +1,7 @@
 <template>
   <div
     id="p-t-t-p"
-    class="absolute max-w-sm space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
+    class="absolute z-[2147483647] max-w-sm space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
     :style="panelPosition"
   >
     <div class="text-left">
@@ -137,7 +137,6 @@ export default {
         if (bottom > window.innerHeight)
           this.offset.height = bottom - window.innerHeight;
       }
-      console.log("offset", this.offset);
     },
     async updateTargetFormat(targetFormat) {
       this.settings.targetFormat = targetFormat;
