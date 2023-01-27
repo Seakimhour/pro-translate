@@ -1,7 +1,7 @@
 <template>
   <div
     id="p-t-t-p"
-    class="absolute max-w-sm space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
+    class="absolute z-[2147483647] max-w-xs space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
     :style="panelPosition"
   >
     <div class="text-left">
@@ -13,7 +13,7 @@
       <p>{{ translatedText }}</p>
     </div>
     <FormatSection
-      v-if="formatText"
+      v-if="settings"
       :text="formatText"
       :settings="settings"
       @updateTargetFormat="updateTargetFormat"
@@ -30,12 +30,7 @@ export default {
   components: {
     FormatSection,
   },
-  props: [
-    "selectedText",
-    "clickedPosition",
-    "selectedPosition",
-    "selectedDirection",
-  ],
+  props: ["selectedText", "selectedPosition", "selectedDirection"],
   data() {
     return {
       translatedText: "",
@@ -43,7 +38,7 @@ export default {
       targetLanguage: "",
       formatText: "",
       settings: null,
-      buttonSize: { height: 20, width: 26 },
+      padding: 20,
       panelSize: { height: 0, width: 0 },
       offset: { height: 0, width: 0 },
       panelPosition: { top: 0, left: 0 },
@@ -53,9 +48,9 @@ export default {
     async initialize() {
       this.settings = await getSettings();
 
-      this.initPanel();
       await this.translate();
       await this.initFormat();
+      this.initPanel();
     },
     async translate() {
       this.targetLanguage = this.settings.targetLanguage.code;
@@ -93,7 +88,6 @@ export default {
     },
     initPanel() {
       const translationPanel = document.getElementById("p-t-t-p");
-      translationPanel.style.width = translationPanel.offsetWidth + 70 + "px";
 
       this.panelSize = {
         height: translationPanel.offsetHeight,
@@ -101,36 +95,35 @@ export default {
       };
 
       this.setOffset(
-        this.buttonSize,
+        this.padding,
         this.panelSize,
         this.selectedPosition,
         this.selectedDirection
       );
 
       this.setPanelPosition(
-        this.buttonSize,
         this.selectedPosition,
         this.offset,
         this.selectedDirection
       );
     },
-    setPanelPosition(size, position, offset, direction) {
+    setPanelPosition(position, offset, direction) {
       this.panelPosition = {
         top:
           direction === "left"
-            ? `${parseInt(position.top - size.width - offset.height)}px`
-            : `${parseInt(position.bottom - offset.height)}px`,
+            ? `${parseInt(position.top + window.scrollY - offset.height)}px`
+            : `${parseInt(position.bottom + window.scrollY - offset.height)}px`,
         left:
           direction === "left"
-            ? `${parseInt(position.left - size.width - offset.width)}px`
-            : `${parseInt(position.right - offset.width)}px`,
+            ? `${parseInt(position.left + window.scrollX - offset.width)}px`
+            : `${parseInt(position.right + window.scrollX - offset.width)}px`,
       };
     },
-    setOffset(buttonSize, panelSize, position, direction) {
-      let left = position.left + panelSize.width;
-      let right = position.right + panelSize.width + buttonSize.width;
-      let top = position.top - buttonSize.width;
-      let bottom = position.bottom;
+    setOffset(padding, panelSize, position, direction) {
+      let left = position.left + panelSize.width + padding;
+      let right = position.right + panelSize.width + padding;
+      let top = position.top + panelSize.height + padding;
+      let bottom = position.bottom + panelSize.height + padding;
 
       if (direction === "left") {
         if (left > window.innerWidth)
@@ -149,7 +142,7 @@ export default {
       await setSettings(this.settings);
     },
   },
-  mounted() {
+  created() {
     this.initialize();
   },
 };

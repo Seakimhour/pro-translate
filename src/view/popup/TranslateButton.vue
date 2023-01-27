@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute" :style="buttonPosition">
+  <div class="absolute z-[2147483647]" :style="buttonPosition">
     <img
       :src="iconPath"
       :style="imageSize"
@@ -33,15 +33,19 @@ export default {
         top:
           this.selectedDirection === "left"
             ? `${parseInt(
-                this.selectedPosition.top - this.buttonSize.height
+                this.selectedPosition.top +
+                  window.scrollY -
+                  this.buttonSize.height
               )}px`
-            : `${parseInt(this.selectedPosition.bottom)}px`,
+            : `${parseInt(this.selectedPosition.bottom + window.scrollY)}px`,
         left:
           this.selectedDirection === "left"
             ? `${parseInt(
-                this.selectedPosition.left - this.buttonSize.width
+                this.selectedPosition.left +
+                  window.scrollX -
+                  this.buttonSize.width
               )}px`
-            : `${parseInt(this.selectedPosition.right)}px`,
+            : `${parseInt(this.selectedPosition.right + window.scrollX)}px`,
       };
     },
   },

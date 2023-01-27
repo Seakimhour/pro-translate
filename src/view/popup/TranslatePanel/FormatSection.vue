@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     format(text, targetFormat) {
-      console.log(text, targetFormat);
       switch (targetFormat) {
         case "camel":
           return changeCase.camelCase(text);
