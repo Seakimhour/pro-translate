@@ -8,7 +8,6 @@
     />
     <TranslatePanel
       v-else
-      :clickedPosition="clickedPosition"
       :selectedPosition="selectedPosition"
       :selectedDirection="selectedDirection"
       :selectedText="selectedText"
@@ -25,12 +24,7 @@ export default {
     TranslateButton,
     TranslatePanel,
   },
-  props: [
-    "selectedText",
-    "selectedPosition",
-    "clickedPosition",
-    "selectedDirection",
-  ],
+  props: ["selectedText", "selectedPosition", "selectedDirection"],
   data() {
     return {
       showTranslatePanel: false,

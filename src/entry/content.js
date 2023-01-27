@@ -27,12 +27,11 @@ const mouseUpHandler = (mouseEvent) => {
 
   const selectedRect = selection.getRangeAt(0).getBoundingClientRect();
   const selectedPosition = {
-    right: selectedRect.right + window.scrollX,
-    left: selectedRect.left + window.scrollX,
-    top: selectedRect.top + window.scrollY,
-    bottom: selectedRect.bottom + window.scrollY,
+    right: selectedRect.right,
+    left: selectedRect.left,
+    top: selectedRect.top,
+    bottom: selectedRect.bottom,
   };
-  const clickedPosition = { x: mouseEvent.pageX, y: mouseEvent.pageY };
 
   const range = document.createRange();
   range.setStart(selection.anchorNode, selection.anchorOffset);
@@ -40,7 +39,7 @@ const mouseUpHandler = (mouseEvent) => {
 
   const selectedDirection = range.collapsed ? "left" : "right";
 
-  showPopup(selectedText, selectedPosition, clickedPosition, selectedDirection);
+  showPopup(selectedText, selectedPosition, selectedDirection);
 };
 
 const removePopup = () => {
@@ -48,12 +47,7 @@ const removePopup = () => {
   if (element) element.parentNode.removeChild(element);
 };
 
-const showPopup = (
-  selectedText,
-  selectedPosition,
-  clickedPosition,
-  selectedDirection
-) => {
+const showPopup = (selectedText, selectedPosition, selectedDirection) => {
   document.body.insertAdjacentHTML(
     "beforeend",
     `<div id="pro-translate"></div>`
@@ -62,7 +56,6 @@ const showPopup = (
   createApp(ProTranslate, {
     selectedText,
     selectedPosition,
-    clickedPosition,
     selectedDirection,
   }).mount("#pro-translate");
 };
