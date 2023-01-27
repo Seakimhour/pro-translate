@@ -39,10 +39,8 @@
 </template>
 
 <script>
-import { getCases, setCases } from "../../../assets/settings.js";
-
 export default {
-  props: ["formatCases"],
+  props: ["formatCases", "cases"],
   data() {
     return {
       selectedCase: {
@@ -52,7 +50,7 @@ export default {
     };
   },
   computed: {
-    cases() {
+    formatCasesName() {
       return this.formatCases.map((c) => c.name);
     },
     orderedCases() {
@@ -60,29 +58,26 @@ export default {
       this.userCases.forEach((c) => {
         orderedCases.push(c);
       });
-      this.cases.forEach((c) => {
+      this.formatCasesName.forEach((c) => {
         if (!orderedCases.includes(c)) orderedCases.push(c);
       });
       return orderedCases;
     },
   },
   methods: {
-    async getUserCases() {
-      this.userCases = Object.values(await getCases());
-    },
-    async selectCase(formatCase) {
-      const INDEX = this.cases.indexOf(formatCase);
+    selectCase(formatCase) {
+      const INDEX = this.formatCasesName.indexOf(formatCase);
       this.selectedCase = this.formatCases[INDEX];
       if (this.userCases.includes(formatCase)) {
         this.userCases = this.userCases.filter((c) => c !== formatCase);
       } else {
         this.userCases.unshift(formatCase);
       }
-      await setCases(this.userCases);
+      this.$emit("updateCases", this.userCases);
     },
   },
-  mounted() {
-    this.getUserCases();
+  created() {
+    this.userCases = Object.values(this.cases);
   },
 };
 </script>

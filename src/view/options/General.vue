@@ -68,7 +68,12 @@
           class="rounded border-gray-300 p-2 text-primary shadow-sm focus:border-primary focus:ring focus:ring-primary/50"
         />
       </SettingOption>
-      <CaseList :formatCases="formatCases" />
+      <CaseList
+        v-if="settings"
+        :formatCases="formatCases"
+        :cases="settings.cases"
+        @updateCases="updateCases"
+      />
     </div>
     <div class="flex flex-col py-2">
       <SettingOption
@@ -131,6 +136,9 @@ export default {
   methods: {
     async initSetting() {
       this.settings = await getSettings();
+    },
+    updateCases(cases) {
+      this.settings.cases = cases;
     },
   },
   created() {

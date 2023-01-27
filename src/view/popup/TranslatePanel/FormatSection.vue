@@ -5,7 +5,7 @@
       class="pro-translate-scrollbar-y-xs flex select-none flex-row space-x-1 overflow-auto pb-1 text-xs"
     >
       <div
-        v-for="(formatCase, index) in cases"
+        v-for="(formatCase, index) in settings.cases"
         :key="index"
         :class="
           targetFormat === formatCase
@@ -36,7 +36,7 @@
 import * as changeCase from "change-case";
 
 export default {
-  props: ["text", "settings", "cases"],
+  props: ["text", "settings"],
   data() {
     return {
       targetFormat: "",

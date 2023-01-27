@@ -8,9 +8,8 @@ const defaultSettings = {
   targetFormat: "camel",
   autoSetFormat: true,
   showIcon: true,
+  cases: formatCases.map((c) => c.name),
 };
-
-const defaultCases = formatCases.map((c) => c.name);
 
 export const getSettings = async () => {
   const response = await browser.storage.local.get("settings");
@@ -19,13 +18,4 @@ export const getSettings = async () => {
 
 export const setSettings = async (settings) => {
   await browser.storage.local.set({ settings: settings });
-};
-
-export const getCases = async () => {
-  const response = await browser.storage.local.get("cases");
-  return response.cases || defaultCases;
-};
-
-export const setCases = async (cases) => {
-  await browser.storage.local.set({ cases: cases });
 };

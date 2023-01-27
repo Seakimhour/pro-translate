@@ -16,7 +16,6 @@
       v-if="formatText"
       :text="formatText"
       :settings="settings"
-      :cases="cases"
       @updateTargetFormat="updateTargetFormat"
     />
   </div>
@@ -25,7 +24,7 @@
 <script>
 import FormatSection from "./TranslatePanel/FormatSection.vue";
 import { translateAPI, detectLanguage } from "../../assets/translate.js";
-import { getSettings, getCases, setSettings } from "../../assets/settings.js";
+import { getSettings, setSettings } from "../../assets/settings.js";
 
 export default {
   components: {
@@ -44,7 +43,6 @@ export default {
       targetLanguage: "",
       formatText: "",
       settings: null,
-      cases: null,
       buttonSize: { height: 20, width: 26 },
       panelSize: { height: 0, width: 0 },
       offset: { height: 0, width: 0 },
@@ -54,7 +52,6 @@ export default {
   methods: {
     async initialize() {
       this.settings = await getSettings();
-      this.cases = await getCases();
 
       this.initPanel();
       await this.translate();
