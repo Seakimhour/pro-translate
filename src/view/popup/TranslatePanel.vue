@@ -1,7 +1,7 @@
 <template>
   <div
     id="p-t-t-p"
-    class="absolute z-[2147483647] max-w-sm space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
+    class="absolute z-[2147483647] max-w-xs space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
     :style="panelPosition"
   >
     <div class="text-left">
@@ -88,7 +88,6 @@ export default {
     },
     initPanel() {
       const translationPanel = document.getElementById("p-t-t-p");
-      translationPanel.style.width = translationPanel.offsetWidth + 100 + "px";
 
       this.panelSize = {
         height: translationPanel.offsetHeight,
