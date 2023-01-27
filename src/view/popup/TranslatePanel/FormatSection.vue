@@ -1,4 +1,3 @@
-<!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
   <div class="space-y-1 text-left">
     <p class="text-xs text-gray-400">Formated Text</p>
@@ -6,21 +5,21 @@
       class="pro-translate-scrollbar-y-xs flex select-none flex-row space-x-1 overflow-auto pb-1 text-xs"
     >
       <div
-        v-for="(formatCase, index) in formatCases"
+        v-for="(formatCase, index) in settings.cases"
         :key="index"
         :class="
-          selectedCase === formatCase.name
+          targetFormat === formatCase
             ? 'cursor-pointer rounded-full bg-gray-600 px-2 pb-0.5 text-white'
             : 'cursor-pointer rounded-full bg-gray-200 px-2 pb-0.5 hover:bg-gray-400'
         "
-        @click="selectedCase = formatCase.name"
+        @click="changeCase(formatCase)"
       >
-        {{ formatCase.name }}
+        {{ formatCase }}
       </div>
     </div>
     <div class="flex flex-row items-center justify-between">
       <input
-        class="h-8 w-full rounded-l bg-gray-200 px-2 text-sm focus:outline-none"
+        class="h-8 w-full rounded-l bg-gray-200 px-2 text-xs focus:outline-none"
         :value="formatedText"
       />
       <div
@@ -37,88 +36,21 @@
 import * as changeCase from "change-case";
 
 export default {
-  props: ["translatedText"],
+  props: ["text", "settings"],
   data() {
     return {
-      selectedCase: "camel",
-      formatCases: [
-        {
-          name: "camel",
-          example: "testString",
-          discription:
-            "Transform into a string with the separator denoted by the next word capitalized.",
-        },
-        {
-          name: "capital",
-          example: "Test String",
-          discription:
-            "Transform into a space separated string with each word capitalized.",
-        },
-        {
-          name: "constant",
-          example: "TEST_STRING",
-          discription:
-            "Transform into upper case string with an underscore between words.",
-        },
-        {
-          name: "dot",
-          example: "test.string",
-          discription:
-            "Transform into a lower case string with a period between words.",
-        },
-        {
-          name: "header",
-          example: "Test-String",
-          discription:
-            "Transform into a dash separated string of capitalized words.",
-        },
-        {
-          name: "lower",
-          example: "test string",
-          discription:
-            "Transform into a lower cased string with spaces between words.",
-        },
-        {
-          name: "param",
-          example: "test-string",
-          discription:
-            "Transform into a lower cased string with dashes between words.",
-        },
-        {
-          name: "pascal",
-          example: "TestString",
-          discription:
-            "Transform into a string of capitalized words without separators.",
-        },
-        {
-          name: "path",
-          example: "test/string",
-          discription:
-            "Transform into a lower case string with slashes between words.",
-        },
-        {
-          name: "sentence",
-          example: "Test string",
-          discription:
-            "Transform into a lower case with spaces between words, then capitalize the string.",
-        },
-        {
-          name: "snake",
-          example: "test_string",
-          discription:
-            "Transform into a lower case string with underscores between words.",
-        },
-      ],
+      targetFormat: "",
     };
   },
   computed: {
     formatedText() {
-      return this.format(this.translatedText, this.selectedCase);
+      return this.format(this.text, this.targetFormat);
     },
   },
   methods: {
-    format(text, formatCase) {
-      switch (formatCase) {
+    format(text, targetFormat) {
+      console.log(text, targetFormat);
+      switch (targetFormat) {
         case "camel":
           return changeCase.camelCase(text);
         case "capital":
@@ -145,6 +77,13 @@ export default {
           return "";
       }
     },
+    async changeCase(formatCase) {
+      this.targetFormat = formatCase;
+
+      if (this.settings.autoSetFormat) {
+        this.$emit("updateTargetFormat", this.targetFormat);
+      }
+    },
     copyToClipboard(text) {
       navigator.clipboard.writeText(text);
     },
@@ -165,6 +104,9 @@ export default {
   },
   mounted() {
     this.horizontalScroll();
+  },
+  created() {
+    this.targetFormat = this.settings.targetFormat;
   },
 };
 </script>

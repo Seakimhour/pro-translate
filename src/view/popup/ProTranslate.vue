@@ -36,13 +36,5 @@ export default {
       showTranslatePanel: false,
     };
   },
-  mounted() {
-    // console.log(window.scrollY);
-    // console.log(this.selectedText);
-    // console.log(this.selectedPosition);
-    // console.log(this.clickedPosition);
-    // console.log(this.selectedDirection);
-    // console.log(window.innerHeight, window.innerWidth);
-  },
 };
 </script>

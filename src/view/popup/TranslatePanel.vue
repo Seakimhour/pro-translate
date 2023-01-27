@@ -1,7 +1,7 @@
 <template>
   <div
     id="p-t-t-p"
-    class="absolute max-w-sm space-y-2 rounded border bg-white p-4 shadow"
+    class="absolute max-w-sm space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
     :style="panelPosition"
   >
     <div class="text-left">
@@ -12,12 +12,19 @@
       <p class="text-xs text-gray-400">Translated Text</p>
       <p>{{ translatedText }}</p>
     </div>
-    <FormatSection v-if="translatedText" :translatedText="translatedText" />
+    <FormatSection
+      v-if="formatText"
+      :text="formatText"
+      :settings="settings"
+      @updateTargetFormat="updateTargetFormat"
+    />
   </div>
 </template>
 
 <script>
 import FormatSection from "./TranslatePanel/FormatSection.vue";
+import { translateAPI, detectLanguage } from "../../assets/translate.js";
+import { getSettings, setSettings } from "../../assets/settings.js";
 
 export default {
   components: {
@@ -32,36 +39,82 @@ export default {
   data() {
     return {
       translatedText: "",
-      buttonSize: {
-        height: 20,
-        width: 26,
-      },
-      panelSize: {
-        height: 0,
-        width: 0,
-      },
-      offset: {
-        height: 0,
-        width: 0,
-      },
-      panelPosition: {
-        top: 0,
-        left: 0,
-      },
+      sourceLanguage: "auto",
+      targetLanguage: "",
+      formatText: "",
+      settings: null,
+      buttonSize: { height: 20, width: 26 },
+      panelSize: { height: 0, width: 0 },
+      offset: { height: 0, width: 0 },
+      panelPosition: { top: 0, left: 0 },
     };
   },
   methods: {
-    translate(text, sourceLanguage, targetLanguage) {
-      fetch(
-        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLanguage}&tl=${targetLanguage}&dt=t&q=${encodeURI(
-          text
-        )}`
-      )
-        .then((response) => response.json())
-        .then((result) => (this.translatedText = result[0][0][0]));
+    async initialize() {
+      this.settings = await getSettings();
+
+      this.initPanel();
+      await this.translate();
+      await this.initFormat();
+    },
+    async translate() {
+      this.targetLanguage = this.settings.targetLanguage.code;
+
+      const detectedLanguage = await detectLanguage(this.selectedText);
+
+      this.sourceLanguage = detectedLanguage.languages[0].language;
+
+      const matchTargetLanguage = this.sourceLanguage === this.targetLanguage;
+
+      if (matchTargetLanguage && this.settings.autoSwitch)
+        this.targetLanguage = this.settings.secondTargetLanguage.code;
+
+      const response = await translateAPI(
+        this.selectedText,
+        this.sourceLanguage,
+        this.targetLanguage
+      );
+
+      this.translatedText = response[0][0][0];
+    },
+    async initFormat() {
+      if (this.targetLanguage === "en") {
+        this.formatText = this.translatedText;
+      } else if (this.sourceLanguage === "en") {
+        this.formatText = this.selectedText;
+      } else {
+        const response = await translateAPI(
+          this.selectedText,
+          this.sourceLanguage,
+          "en"
+        );
+        this.formatText = response[0][0][0];
+      }
+    },
+    initPanel() {
+      const translationPanel = document.getElementById("p-t-t-p");
+      translationPanel.style.width = translationPanel.offsetWidth + 70 + "px";
+
+      this.panelSize = {
+        height: translationPanel.offsetHeight,
+        width: translationPanel.offsetWidth,
+      };
+
+      this.setOffset(
+        this.buttonSize,
+        this.panelSize,
+        this.selectedPosition,
+        this.selectedDirection
+      );
+
+      this.setPanelPosition(
+        this.buttonSize,
+        this.selectedPosition,
+        this.offset,
+        this.selectedDirection
+      );
     },
     setPanelPosition(size, position, offset, direction) {
-      console.log(offset);
       this.panelPosition = {
         top:
           direction === "left"
@@ -91,36 +144,27 @@ export default {
           this.offset.height = bottom - window.innerHeight;
       }
     },
+    async updateTargetFormat(targetFormat) {
+      this.settings.targetFormat = targetFormat;
+      await setSettings(this.settings);
+    },
   },
   mounted() {
-    const translationPanel = document.getElementById("p-t-t-p");
-    translationPanel.style.width = translationPanel.offsetWidth + 70 + "px";
-
-    this.translate(this.selectedText, "auto", "en");
-
-    this.panelSize = {
-      height: translationPanel.offsetHeight,
-      width: translationPanel.offsetWidth,
-    };
-
-    this.setOffset(
-      this.buttonSize,
-      this.panelSize,
-      this.selectedPosition,
-      this.selectedDirection
-    );
-
-    this.setPanelPosition(
-      this.buttonSize,
-      this.selectedPosition,
-      this.offset,
-      this.selectedDirection
-    );
+    this.initialize();
   },
 };
 </script>
 
 <style scoped>
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
 p {
   margin: 0;
 }

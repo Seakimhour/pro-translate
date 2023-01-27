@@ -11,7 +11,8 @@
     },
     "default_locale": "en",
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "storage"
     ],
     "content_scripts": [
         {
@@ -25,6 +26,7 @@
             ]
         }
     ],
+    "options_page": "options.html",
     "action": {
         "default_icon": {
             "16": "icons/16.png",

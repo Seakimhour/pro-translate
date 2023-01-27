@@ -10,13 +10,13 @@
 </template>
 
 <script>
-/* eslint-disable no-undef */
+import browser from "webextension-polyfill";
+
 export default {
   props: ["selectedDirection", "selectedPosition"],
   data() {
     return {
-      // iconPath: chrome.runtime.getURL("icons/128.png"),
-      iconPath: "icons/128.png",
+      iconPath: browser.runtime.getURL("icons/128.png"),
       imageSize: {
         height: "16px",
         width: "22px",
