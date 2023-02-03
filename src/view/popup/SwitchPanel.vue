@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { getSettings, setSettings } from "../../assets/settings.js";
+import { getSettings, setSettings } from "../../js/settings.js";
 
 export default {
   data() {

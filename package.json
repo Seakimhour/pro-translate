@@ -1,14 +1,13 @@
 {
   "name": "pro-translate",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "vite build",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development",
     "dev": "vite",
-    "css-watch": "tailwindcss -i ./src/assets/style.css -o ./public/style.css --watch",
-    "preview": "vite preview"
+    "build": "vue-cli-service  --env.NODE_ENV=production build-watch --mode production",
+    "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development",
+    "css-watch": "tailwindcss -i ./src/css/style.css -o ./src/css/output.css --watch",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@vue/cli-service": "^5.0.8",

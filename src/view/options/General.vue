@@ -108,9 +108,9 @@
 import SettingOption from "./components/Option.vue";
 import CaseList from "./components/CaseList.vue";
 import Dropdown from "./components/Dropdown.vue";
-import { getSettings, setSettings } from "../../assets/settings.js";
-import { formatCases } from "../../assets/format-cases.js";
-import { languages } from "../../assets/languages.js";
+import { getSettings, setSettings } from "../../js/settings.js";
+import { formatCases } from "../../js/format-cases.js";
+import { languages } from "../../js/languages.js";
 
 export default {
   components: {
