@@ -15,6 +15,7 @@ const chromeName = getEntryFile(path.resolve(`src/entry`));
 function getFileExtension(filename) {
   return /[.]/.exec(filename) ? /[^.]+$/.exec(filename)[0] : undefined;
 }
+
 chromeName.forEach((name) => {
   const fileExtension = getFileExtension(name);
   const fileName = name.replace("." + fileExtension, "");
