@@ -7,11 +7,15 @@
           >v0.0.1</span
         >
       </p>
-      <p class="text-sm">
+      <p class="text-xs text-gray-400">
         Translate selected text on the web page and convert to specified format.
       </p>
     </div>
-    <a href="https://github.com/Seakimhour/pro-translate">GitHub</a>
+    <a
+      class="text-lg font-bold text-primary"
+      href="https://github.com/Seakimhour/pro-translate"
+      >GitHub Page</a
+    >
   </div>
 </template>
 
