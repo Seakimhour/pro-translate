@@ -1,5 +1,5 @@
 import { createApp } from "vue";
 import Options from "../view/options/SettingsPage.vue";
-import "/public/style.css";
+import "../assets/output.css";
 
 createApp(Options).mount("#pro-translate");

@@ -2,7 +2,7 @@ import browser from "webextension-polyfill";
 import { createApp } from "vue";
 import ProTranslate from "../view/popup/ProTranslate.vue";
 import { getSettings } from "../assets/settings.js";
-import "/public/style.css";
+import "../assets/output.css";
 
 let prevSelectedText = "";
 

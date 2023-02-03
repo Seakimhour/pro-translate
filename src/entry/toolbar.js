@@ -2,7 +2,7 @@ import browser from "webextension-polyfill";
 import { createApp } from "vue";
 import ProTranslate from "../view/popup/ProTranslate.vue";
 import SwitchPanel from "../view/popup/SwitchPanel.vue";
-import "/public/style.css";
+import "../assets/output.css";
 
 const getCurrentTab = async () => {
   let queryOptions = { active: true, lastFocusedWindow: true };
