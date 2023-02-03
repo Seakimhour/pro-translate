@@ -11,6 +11,7 @@
       :selectedPosition="selectedPosition"
       :selectedDirection="selectedDirection"
       :selectedText="selectedText"
+      :onToolbar="onToolbar"
     />
   </Transition>
 </template>
@@ -24,11 +25,14 @@ export default {
     TranslateButton,
     TranslatePanel,
   },
-  props: ["selectedText", "selectedPosition", "selectedDirection"],
+  props: ["selectedText", "selectedPosition", "selectedDirection", "onToolbar"],
   data() {
     return {
       showTranslatePanel: false,
     };
+  },
+  created() {
+    if (this.onToolbar) this.showTranslatePanel = true;
   },
 };
 </script>

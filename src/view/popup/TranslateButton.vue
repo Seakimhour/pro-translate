@@ -16,7 +16,7 @@ export default {
   props: ["selectedDirection", "selectedPosition"],
   data() {
     return {
-      iconPath: browser.runtime.getURL("icons/128.png"),
+      iconPath: browser.runtime.getURL("icons/450.png"),
       imageSize: {
         height: "16px",
         width: "22px",
