@@ -1,16 +1,26 @@
+import browser from "webextension-polyfill";
 import { createApp } from "vue";
 import ProTranslate from "../view/popup/ProTranslate.vue";
+import { getSettings } from "../assets/settings.js";
 import "/public/style.css";
 
 let prevSelectedText = "";
 
 const init = () => {
   document.addEventListener("mouseup", mouseUpHandler);
+  browser.runtime.onMessage.addListener((message) => {
+    return Promise.resolve(
+      message.type === "selectedText" ? window.getSelection().toString() : ""
+    );
+  });
 };
 
-const mouseUpHandler = (mouseEvent) => {
+const mouseUpHandler = async (mouseEvent) => {
   const isLeftClick = mouseEvent.button === 0;
   if (!isLeftClick) return;
+
+  const settings = await getSettings();
+  if (!settings.showIcon) return;
 
   const isInProTranslate =
     document.querySelector("#pro-translate") &&
@@ -53,10 +63,13 @@ const showPopup = (selectedText, selectedPosition, selectedDirection) => {
     `<div id="pro-translate"></div>`
   );
 
+  const onToolbar = false;
+
   createApp(ProTranslate, {
     selectedText,
     selectedPosition,
     selectedDirection,
+    onToolbar,
   }).mount("#pro-translate");
 };
 

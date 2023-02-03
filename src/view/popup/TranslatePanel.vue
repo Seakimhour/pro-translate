@@ -1,7 +1,12 @@
 <template>
   <div
-    id="p-t-t-p"
-    class="absolute z-[2147483647] max-w-xs space-y-2 rounded border border-gray-200 bg-white p-4 shadow"
+    v-show="initCompleted"
+    id="pro-traslate-translation-panel"
+    :class="
+      this.onToolbar
+        ? 'z-[2147483647] max-w-xs space-y-2 bg-white p-4'
+        : 'absolute z-[2147483647] max-w-xs space-y-2 rounded border border-gray-200 bg-white p-4 shadow'
+    "
     :style="panelPosition"
   >
     <div class="text-left">
@@ -30,9 +35,10 @@ export default {
   components: {
     FormatSection,
   },
-  props: ["selectedText", "selectedPosition", "selectedDirection"],
+  props: ["selectedText", "selectedPosition", "selectedDirection", "onToolbar"],
   data() {
     return {
+      initCompleted: false,
       translatedText: "",
       sourceLanguage: "auto",
       targetLanguage: "",
@@ -51,6 +57,7 @@ export default {
       await this.translate();
       await this.initFormat();
       this.initPanel();
+      this.initCompleted = true;
     },
     async translate() {
       this.targetLanguage = this.settings.targetLanguage.code;
@@ -87,7 +94,9 @@ export default {
       }
     },
     initPanel() {
-      const translationPanel = document.getElementById("p-t-t-p");
+      const translationPanel = document.getElementById(
+        "pro-traslate-translation-panel"
+      );
 
       this.panelSize = {
         height: translationPanel.offsetHeight,
