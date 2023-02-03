@@ -28,8 +28,8 @@
 
 <script>
 import FormatSection from "./TranslatePanel/FormatSection.vue";
-import { translateAPI, detectLanguage } from "../../assets/translate.js";
-import { getSettings, setSettings } from "../../assets/settings.js";
+import { translateAPI, detectLanguage } from "../../js/translate.js";
+import { getSettings, setSettings } from "../../js/settings.js";
 
 export default {
   components: {
