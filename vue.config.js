@@ -39,7 +39,7 @@ module.exports = {
             to: `${path.resolve("dist")}/manifest.json`,
           },
           {
-            from: path.resolve(`public/`),
+            from: path.resolve(`src/assets/`),
             to: `${path.resolve("dist")}/`,
           },
         ],
