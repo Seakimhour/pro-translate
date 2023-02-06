@@ -62,9 +62,7 @@ export default {
     async translate() {
       this.targetLanguage = this.settings.targetLanguage.code;
 
-      const detectedLanguage = await detectLanguage(this.selectedText);
-
-      this.sourceLanguage = detectedLanguage.languages[0].language;
+      this.sourceLanguage = await detectLanguage(this.selectedText);
 
       const matchTargetLanguage = this.sourceLanguage === this.targetLanguage;
 
@@ -77,9 +75,11 @@ export default {
         this.targetLanguage
       );
 
-      this.translatedText = response[0][0][0];
+      if (response[0]) this.translatedText = response[0][0][0];
     },
     async initFormat() {
+      if (!this.translatedText) return;
+
       if (this.targetLanguage === "en") {
         this.formatText = this.translatedText;
       } else if (this.sourceLanguage === "en") {
@@ -90,7 +90,8 @@ export default {
           this.sourceLanguage,
           "en"
         );
-        this.formatText = response[0][0][0];
+
+        if (response[0]) this.formatText = response[0][0][0];
       }
     },
     initPanel() {
