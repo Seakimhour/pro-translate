@@ -4,8 +4,6 @@ import ProTranslate from "../view/popup/ProTranslate.vue";
 import { getSettings } from "../js/settings.js";
 import "../css/output.css";
 
-let prevSelectedText = "";
-
 const init = () => {
   document.addEventListener("mouseup", mouseUpHandler);
   browser.runtime.onMessage.addListener((message) => {
@@ -32,8 +30,6 @@ const mouseUpHandler = async (mouseEvent) => {
   const selection = window.getSelection();
   const selectedText = selection.toString();
   if (selectedText.length === 0) return;
-  if (prevSelectedText === selectedText) return;
-  prevSelectedText = selectedText;
 
   const selectedRect = selection.getRangeAt(0).getBoundingClientRect();
   const selectedPosition = {
