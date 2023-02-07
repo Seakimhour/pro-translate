@@ -2,7 +2,7 @@
   "name": "pro-translate",
   "version": "0.1.0",
   "private": true,
-  "scripts": { 
+  "scripts": {
     "vite": "vite",
     "prod": "npm-run-all lint css build",
     "dev": "npm-run-all --parallel css-watch build-watch",
@@ -12,15 +12,11 @@
     "css-watch": "tailwindcss -i ./src/css/style.css -o ./src/css/output.css --watch",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
-  "dependencies": {
-    "@vue/cli-service": "^5.0.8",
-    "change-case": "^4.1.2",
-    "vue": "^3.2.45"
-  },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
-    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-prettier": "^7.0.0",
+    "change-case": "^4.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.22.0",
     "eslint-plugin-tailwindcss": "^3.7.1",
@@ -29,7 +25,7 @@
     "prettier": "^2.7.1",
     "tailwindcss": "^3.2.4",
     "vite": "^4.0.0",
-    "vue-cli-plugin-chrome-extension-cli": "~1.1.4",
+    "vue": "^3.2.47",
     "vue-loader": "^17.0.1",
     "webextension-polyfill": "^0.10.0"
   }
