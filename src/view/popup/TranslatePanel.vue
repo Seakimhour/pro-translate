@@ -1,12 +1,12 @@
 <template>
   <div
-    v-show="initCompleted"
     id="pro-traslate-translation-panel"
-    :class="
-      this.onToolbar
+    :class="[
+      onToolbar
         ? 'z-[2147483647] max-w-xs space-y-2 bg-white p-4'
-        : 'absolute z-[2147483647] max-w-xs space-y-2 rounded border border-gray-200 bg-white p-4 shadow'
-    "
+        : 'absolute z-[2147483647] max-w-xs space-y-2 rounded border border-gray-200 bg-white p-4 shadow',
+      initCompleted ? 'visible' : 'invisible',
+    ]"
     :style="panelPosition"
   >
     <div class="text-left">
