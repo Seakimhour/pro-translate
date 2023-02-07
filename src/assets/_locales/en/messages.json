@@ -1,8 +1,32 @@
 {
-  "extName": {
+  "extension_name": {
     "message": "Pro Translate"
   },
-  "extDescription": {
+  "extension_description": {
     "message": "Translate selected text on the web page and convert to specified format."
+  },
+  "selected_text": {
+    "message": "Selected Text"
+  },
+  "translated_text": {
+    "message": "Translated Text"
+  },
+  "formated_text": {
+    "message": "Formated Text"
+  },
+  "turn_off": {
+    "message": "Click to turn off"
+  },
+  "turn_off_description": {
+    "message": "Show translate button will popup everytime text is selected"
+  },
+  "turn_on": {
+    "message": "Click to turn on"
+  },
+  "turn_on_description": {
+    "message": "Translate button will not show up when text is selected but you can still translate by clicking the Pro Translate icon in toolbar"
+  },
+  "NAME": {
+    "message": ""
   }
 }
