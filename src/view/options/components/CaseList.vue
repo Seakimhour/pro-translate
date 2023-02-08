@@ -1,9 +1,9 @@
 <template>
   <div class="flex w-full flex-col p-2">
     <div>
-      <p>Translation panel format and order</p>
+      <p>{{ messages.format_and_order }}</p>
       <p class="text-xs text-gray-400">
-        Format cases that can be change in translate panel and display order
+        {{ messages.format_and_order_description }}
       </p>
     </div>
     <div class="pt-4">
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  props: ["formatCases", "cases"],
+  props: ["formatCases", "cases", "messages"],
   data() {
     return {
       selectedCase: {

@@ -18,7 +18,7 @@
     "message": "Click to turn off"
   },
   "turn_off_description": {
-    "message": "Show translate button will popup everytime text is selected"
+    "message": "Translate button will popup everytime text is selected"
   },
   "turn_on": {
     "message": "Click to turn on"
@@ -26,7 +26,64 @@
   "turn_on_description": {
     "message": "Translate button will not show up when text is selected but you can still translate by clicking the Pro Translate icon in toolbar"
   },
-  "NAME": {
-    "message": ""
+  "settings": {
+    "message": "Settings"
+  },
+  "general": {
+    "message": "General"
+  },
+  "about": {
+    "message": "About"
+  },
+  "privacy_policy": {
+    "message": "Privacy Policy"
+  },
+  "target_language": {
+    "message": "Target Language"
+  },
+  "target_language_description": {
+    "message": "Select the default target language"
+  },
+  "auto_switch": {
+    "message": "Automatically switch to the second target language"
+  },
+  "auto_switch_description": {
+    "message": "When the selected text is the default target language, translate it to second target language"
+  },
+  "second_target_language": {
+    "message": "Second Target Language"
+  },
+  "second_target_language_description": {
+    "message": "Select the default second target language"
+  },
+  "target_format": {
+    "message": "Target Format"
+  },
+  "target_format_description": {
+    "message": "Select the default target format, format can be change in translation panel"
+  },
+  "auto_set_format": {
+    "message": "Automatically set default format"
+  },
+  "auto_set_format_description": {
+    "message": "When change format in translation panel, set the selected format to default format"
+  },
+  "format_and_order": {
+    "message": "Translation panel format and order"
+  },
+  "format_and_order_description": {
+    "message": "Format cases that can be change in translation panel and display order"
+  },
+  "translate_button_on": {
+    "message": "Show Translate button"
+  },
+  "translate_button_on_description": {
+    "message": "Translate button will popup everytime text is selected"
+  },
+  "translate_button_off": {
+    "message": "Don't show Translate button"
+  },
+  "translate_button_off_description": {
+    "message": "Translate button will not show up when text is selected but you can still translate by clicking the Pro Translate icon in toolbar"
   }
 }
