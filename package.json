@@ -10,7 +10,9 @@
     "css": "tailwindcss -i ./src/css/style.css -o ./src/css/output.css",
     "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development",
     "css-watch": "tailwindcss -i ./src/css/style.css -o ./src/css/output.css --watch",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
@@ -25,6 +27,7 @@
     "prettier": "^2.7.1",
     "tailwindcss": "^3.2.4",
     "vite": "^4.0.0",
+    "vitest": "^0.28.4",
     "vue": "^3.2.47",
     "vue-cli-plugin-chrome-extension-cli": "^1.1.4",
     "vue-loader": "^17.0.1",
