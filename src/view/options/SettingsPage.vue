@@ -13,7 +13,7 @@
               : 'text-gray-400 hover:text-gray-500'
           "
         >
-          General
+          {{ messages.general }}
         </div>
         <div
           @click="currentTab = 'about'"
@@ -23,7 +23,7 @@
               : 'text-gray-400 hover:text-gray-500'
           "
         >
-          About
+          {{ messages.about }}
         </div>
         <div
           @click="currentTab = 'privacy_policy'"
@@ -33,15 +33,15 @@
               : 'text-gray-400 hover:text-gray-500'
           "
         >
-          Privacy Policy
+          {{ messages.privacy_policy }}
         </div>
       </div>
     </div>
     <div class="flex-1">
       <div class="h-24 border-b-2 border-primary">
-        <h1 class="m-0 pt-12 text-primary">Settings</h1>
+        <h1 class="m-0 pt-12 text-primary">{{ messages.settings }}</h1>
       </div>
-      <General v-if="currentTab === 'general'" />
+      <General :messages="messages" v-if="currentTab === 'general'" />
       <About v-if="currentTab === 'about'" />
       <PrivacyPolicy v-if="currentTab === 'privacy_policy'" />
     </div>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { getMessages } from "../../js/localization.js";
 import General from "./General.vue";
 import About from "./About.vue";
 import PrivacyPolicy from "./PrivacyPolicy.vue";
@@ -62,7 +63,37 @@ export default {
   data() {
     return {
       currentTab: "general",
+      messages: {
+        settings: "",
+        general: "",
+        about: "",
+        privacy_policy: "",
+        target_language: "",
+        target_language_description: "",
+        auto_switch: "",
+        auto_switch_description: "",
+        second_target_language: "",
+        second_target_language_description: "",
+        target_format: "",
+        target_format_description: "",
+        auto_set_format: "",
+        auto_set_format_description: "",
+        format_and_order: "",
+        format_and_order_description: "",
+        translate_button_on: "",
+        translate_button_on_description: "",
+        translate_button_off: "",
+        translate_button_off_description: "",
+      },
     };
+  },
+  methods: {
+    async initialize() {
+      this.messages = await getMessages(this.messages);
+    },
+  },
+  created() {
+    this.initialize();
   },
 };
 </script>

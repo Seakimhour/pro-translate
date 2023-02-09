@@ -1,14 +1,14 @@
 <template>
-  <div class="space-y-2">
+  <div v-if="manifest" class="space-y-2">
     <div class="py-4">
       <p class="text-lg font-bold text-primary">
-        Pro Translate
+        {{ manifest.name }}
         <span class="rounded bg-primary px-1 font-light text-secondary"
-          >v0.0.1</span
+          >v{{ manifest.version }}</span
         >
       </p>
       <p class="text-xs text-gray-400">
-        Translate selected text on the web page and convert to specified format.
+        {{ manifest.description }}
       </p>
     </div>
     <a
@@ -20,15 +20,17 @@
 </template>
 
 <script>
+import browser from "webextension-polyfill";
+
 export default {
   data() {
     return {
-      version: "v0.0.1",
+      manifest: null,
     };
   },
-  computed: {},
-  methods: {},
-  mounted() {},
+  created() {
+    this.manifest = browser.runtime.getManifest();
+  },
 };
 </script>
 

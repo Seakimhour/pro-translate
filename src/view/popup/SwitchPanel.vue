@@ -7,10 +7,8 @@
           class="h-auto w-full cursor-pointer"
           src="icons/450.png"
         />
-        <p class="text-red-300">Click to turn off</p>
-        <p class="mt-1">
-          Show translate button will popup everytime text is selected
-        </p>
+        <p class="text-red-300">{{ messages.turn_off }}</p>
+        <p class="mt-1">{{ messages.turn_off_description }}</p>
       </div>
       <div v-else class="text-center text-xs">
         <img
@@ -18,28 +16,33 @@
           class="h-auto w-full cursor-pointer"
           src="icons/gray-450.png"
         />
-        <p class="text-red-300">Click to turn on</p>
-        <p class="mt-1">
-          Translate button will not show up when text is selected but you can
-          still translate by clicking the Pro Translate icon in toolbar
-        </p>
+        <p class="text-red-300">{{ messages.turn_on }}</p>
+        <p class="mt-1">{{ messages.turn_on_description }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getMessages } from "../../js/localization.js";
 import { getSettings, setSettings } from "../../js/settings.js";
 
 export default {
   data() {
     return {
+      messages: {
+        turn_off: "",
+        turn_off_description: "",
+        turn_on: "",
+        turn_on_description: "",
+      },
       settings: null,
     };
   },
   methods: {
     async initialize() {
       this.settings = await getSettings();
+      this.messages = await getMessages(this.messages);
     },
     async updateShowIcon() {
       this.settings.showIcon = !this.settings.showIcon;

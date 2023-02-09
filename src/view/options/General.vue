@@ -2,8 +2,8 @@
   <div v-if="settings">
     <div class="flex flex-col border-b-2 border-primary/20 py-2">
       <SettingOption
-        :label="'Target Language'"
-        :description="'Select the default target language'"
+        :label="messages.target_language"
+        :description="messages.target_language_description"
       >
         <Dropdown :value="settings.targetLanguage.country">
           <div
@@ -17,8 +17,8 @@
         </Dropdown>
       </SettingOption>
       <SettingOption
-        :label="'Automatically switch to the second target language'"
-        :description="'When the selected text is the default target language, translate it to second target language'"
+        :label="messages.auto_switch"
+        :description="messages.auto_switch_description"
       >
         <input
           type="checkbox"
@@ -27,8 +27,8 @@
         />
       </SettingOption>
       <SettingOption
-        :label="'Second Target Language'"
-        :description="'Select the default second target language'"
+        :label="messages.second_target_language"
+        :description="messages.second_target_language_description"
       >
         <Dropdown :value="settings.secondTargetLanguage.country">
           <div
@@ -44,8 +44,8 @@
     </div>
     <div class="flex flex-col border-b-2 border-primary/20 py-2">
       <SettingOption
-        :label="'Target Format'"
-        :description="'Select the default target format, format can be change in translation panel'"
+        :label="messages.target_format"
+        :description="messages.target_format_description"
       >
         <Dropdown :value="settings.targetFormat">
           <div
@@ -59,8 +59,8 @@
         </Dropdown>
       </SettingOption>
       <SettingOption
-        :label="'Automatically set default format'"
-        :description="'When change format in translation panel, set the selected format to default format'"
+        :label="messages.auto_set_format"
+        :description="messages.auto_set_format_description"
       >
         <input
           type="checkbox"
@@ -72,13 +72,14 @@
         v-if="settings"
         :formatCases="formatCases"
         :cases="settings.cases"
+        :messages="messages"
         @updateCases="updateCases"
       />
     </div>
     <div class="flex flex-col py-2">
       <SettingOption
-        :label="'Show translation icon'"
-        :description="'When select text an icon will popup that popup translation penal when click'"
+        :label="messages.translate_button_on"
+        :description="messages.translate_button_on_description"
       >
         <input
           type="radio"
@@ -89,8 +90,8 @@
         />
       </SettingOption>
       <SettingOption
-        :label="'Don\'t show icon'"
-        :description="'Will not show icon when select text but you can still translate by clicking the Pro Translate icon in toolbar'"
+        :label="messages.translate_button_off"
+        :description="messages.translate_button_off_description"
       >
         <input
           type="radio"
@@ -118,6 +119,7 @@ export default {
     CaseList,
     Dropdown,
   },
+  props: ["messages"],
   data() {
     return {
       formatCases: [],

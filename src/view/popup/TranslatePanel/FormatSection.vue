@@ -1,8 +1,9 @@
 <template>
   <div class="space-y-1 text-left">
-    <p class="text-xs text-gray-400">Formated Text</p>
+    <p class="text-xs text-gray-400">{{ messages.formated_text }}</p>
     <div
-      class="pro-translate-scrollbar-y-xs flex select-none flex-row space-x-1 overflow-auto pb-1 text-xs"
+      id="pro-translate-scrollbar-y-xs"
+      class="flex select-none flex-row space-x-1 overflow-auto pb-1 text-xs"
     >
       <div
         v-for="(formatCase, index) in settings.cases"
@@ -36,7 +37,7 @@
 import * as changeCase from "change-case";
 
 export default {
-  props: ["text", "settings"],
+  props: ["text", "settings", "messages"],
   data() {
     return {
       targetFormat: "",
@@ -87,18 +88,17 @@ export default {
       navigator.clipboard.writeText(text);
     },
     horizontalScroll() {
-      const scrollbar = document.getElementsByClassName(
-        "pro-translate-scrollbar-y-xs"
-      )[0];
-      scrollbar.addEventListener("wheel", function (e) {
-        if (e.deltaY > 0) {
-          scrollbar.scrollLeft += 50;
+      const scrollbar = document.getElementById("pro-translate-scrollbar-y-xs");
+      if (scrollbar) {
+        scrollbar.addEventListener("wheel", function (e) {
+          if (e.deltaY > 0) {
+            scrollbar.scrollLeft += 50;
+          } else {
+            scrollbar.scrollLeft -= 50;
+          }
           e.preventDefault();
-        } else {
-          scrollbar.scrollLeft -= 50;
-          e.preventDefault();
-        }
-      });
+        });
+      }
     },
   },
   mounted() {
@@ -111,15 +111,15 @@ export default {
 </script>
 
 <style scoped>
-.pro-translate-scrollbar-y-xs::-webkit-scrollbar {
+#pro-translate-scrollbar-y-xs::-webkit-scrollbar {
   height: 4px;
 }
 
-.pro-translate-scrollbar-y-xs::-webkit-scrollbar-track {
+#pro-translate-scrollbar-y-xs::-webkit-scrollbar-track {
   border-radius: 99px;
 }
 
-.pro-translate-scrollbar-y-xs::-webkit-scrollbar-thumb {
+#pro-translate-scrollbar-y-xs::-webkit-scrollbar-thumb {
   border-radius: 99px;
   background-color: rgb(209 213 219);
 }

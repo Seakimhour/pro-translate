@@ -10,26 +10,28 @@
     :style="panelPosition"
   >
     <div class="text-left">
-      <p class="text-xs text-gray-400">Selected Text</p>
+      <p class="text-xs text-gray-400">{{ messages.selected_text }}</p>
       <p>{{ selectedText }}</p>
     </div>
     <div class="text-left">
-      <p class="text-xs text-gray-400">Translated Text</p>
+      <p class="text-xs text-gray-400">{{ messages.translated_text }}</p>
       <p>{{ translatedText }}</p>
     </div>
     <FormatSection
       v-if="settings"
       :text="formatText"
       :settings="settings"
+      :messages="messages"
       @updateTargetFormat="updateTargetFormat"
     />
   </div>
 </template>
 
 <script>
-import FormatSection from "./TranslatePanel/FormatSection.vue";
+import { getMessages } from "../../js/localization.js";
 import { translateAPI, detectLanguage } from "../../js/translate.js";
 import { getSettings, setSettings } from "../../js/settings.js";
+import FormatSection from "./TranslatePanel/FormatSection.vue";
 
 export default {
   components: {
@@ -38,6 +40,11 @@ export default {
   props: ["selectedText", "selectedPosition", "selectedDirection", "onToolbar"],
   data() {
     return {
+      messages: {
+        selected_text: "",
+        translated_text: "",
+        formated_text: "",
+      },
       initCompleted: false,
       translatedText: "",
       sourceLanguage: "auto",
@@ -53,7 +60,7 @@ export default {
   methods: {
     async initialize() {
       this.settings = await getSettings();
-
+      this.messages = await getMessages(this.messages);
       await this.translate();
       await this.initFormat();
       this.initPanel();
