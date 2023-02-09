@@ -38,6 +38,12 @@
   "privacy_policy": {
     "message": "Privacy Policy"
   },
+  "ui_language": {
+    "message": "UI Language"
+  },
+  "ui_language_description": {
+    "message": "Select the default UI language"
+  },
   "target_language": {
     "message": "Target Language"
   },

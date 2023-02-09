@@ -68,6 +68,8 @@ export default {
         general: "",
         about: "",
         privacy_policy: "",
+        ui_language: "",
+        ui_language_description: "",
         target_language: "",
         target_language_description: "",
         auto_switch: "",

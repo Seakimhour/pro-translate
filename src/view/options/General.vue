@@ -2,6 +2,23 @@
   <div v-if="settings">
     <div class="flex flex-col border-b-2 border-primary/20 py-2">
       <SettingOption
+        :label="messages.ui_language"
+        :description="messages.ui_language_description"
+      >
+        <Dropdown :value="settings.uiLanguage">
+          <div
+            v-for="language in languages"
+            :key="language.code"
+            @click="updateLanguage(language.code)"
+            class="cursor-pointer px-2 text-sm hover:text-primary"
+          >
+            {{ language.country }}
+          </div>
+        </Dropdown>
+      </SettingOption>
+    </div>
+    <div class="flex flex-col border-b-2 border-primary/20 py-2">
+      <SettingOption
         :label="messages.target_language"
         :description="messages.target_language_description"
       >
@@ -141,6 +158,10 @@ export default {
     },
     updateCases(cases) {
       this.settings.cases = cases;
+    },
+    updateLanguage(code) {
+      this.settings.uiLanguage = code;
+      location.reload();
     },
   },
   created() {

@@ -1,1 +1,95 @@
-{"extension_name":{"message":"Pro Translate"},"extension_description":{"message":"የተመረጠውን ጽሑፍ በድረ-ገጹ ላይ ይተርጉሙ እና ወደተገለጸው ቅርጸት ይቀይሩ።"},"selected_text":{"message":"የተመረጠ ጽሑፍ"},"translated_text":{"message":"የተተረጎመ ጽሑፍ"},"formated_text":{"message":"የተቀረጸ ጽሑፍ"},"turn_off":{"message":"ለማጥፋት ጠቅ ያድርጉ"},"turn_off_description":{"message":"ጽሑፍ በተመረጠ ቁጥር የትርጉም ቁልፍ ብቅ ይላል።"},"turn_on":{"message":"ለማብራት ጠቅ ያድርጉ"},"turn_on_description":{"message":"ጽሁፍ ሲመረጥ የትርጉም ቁልፍ አይታይም ነገር ግን አሁንም በመሳሪያ አሞሌ ውስጥ ያለውን የፕሮ ትርጉም አዶን ጠቅ በማድረግ መተርጎም ይችላሉ።"},"settings":{"message":"ቅንብሮች"},"general":{"message":"አጠቃላይ"},"about":{"message":"ስለ"},"privacy_policy":{"message":"የ ግል የሆነ"},"target_language":{"message":"የዒላማ ቋንቋ"},"target_language_description":{"message":"ነባሪውን የዒላማ ቋንቋ ይምረጡ"},"auto_switch":{"message":"በራስ-ሰር ወደ ሁለተኛው ዒላማ ቋንቋ ይቀይሩ"},"auto_switch_description":{"message":"የተመረጠው ጽሑፍ ነባሪው የዒላማ ቋንቋ ሲሆን ወደ ሁለተኛው የዒላማ ቋንቋ ይተርጉሙት"},"second_target_language":{"message":"ሁለተኛ ዒላማ ቋንቋ"},"second_target_language_description":{"message":"ነባሪውን ሁለተኛ ዒላማ ቋንቋ ይምረጡ"},"target_format":{"message":"የዒላማ ቅርጸት"},"target_format_description":{"message":"ነባሪውን የዒላማ ቅርጸት ይምረጡ፣ ቅርጸት በትርጉም ፓነል ውስጥ ሊቀየር ይችላል።"},"auto_set_format":{"message":"ነባሪ ቅርጸትን በራስ-ሰር ያቀናብሩ"},"auto_set_format_description":{"message":"በትርጉም ፓነል ውስጥ ቅርጸት ሲቀይሩ የተመረጠውን ቅርጸት ወደ ነባሪ ቅርጸት ያዘጋጁ"},"format_and_order":{"message":"የትርጉም ፓነል ቅርጸት እና ቅደም ተከተል"},"format_and_order_description":{"message":"በትርጉም ፓነል እና በማሳያ ቅደም ተከተል ውስጥ ሊለወጡ የሚችሉ ጉዳዮችን ይቅረጹ"},"translate_button_on":{"message":"የትርጉም ቁልፍን አሳይ"},"translate_button_on_description":{"message":"ጽሑፍ በተመረጠ ቁጥር የትርጉም ቁልፍ ብቅ ይላል።"},"translate_button_off":{"message":"የትርጉም ቁልፍ አታሳይ"},"translate_button_off_description":{"message":"ጽሁፍ ሲመረጥ የትርጉም ቁልፍ አይታይም ነገር ግን አሁንም በመሳሪያ አሞሌ ውስጥ ያለውን የፕሮ ትርጉም አዶን ጠቅ በማድረግ መተርጎም ይችላሉ።"}}
+{
+  "extension_name": {
+    "message": "Pro Translate"
+  },
+  "extension_description": {
+    "message": "የተመረጠውን ጽሑፍ በድረ-ገጹ ላይ ይተርጉሙ እና ወደተገለጸው ቅርጸት ይቀይሩ።"
+  },
+  "selected_text": {
+    "message": "የተመረጠ ጽሑፍ"
+  },
+  "translated_text": {
+    "message": "የተተረጎመ ጽሑፍ"
+  },
+  "formated_text": {
+    "message": "የተቀረጸ ጽሑፍ"
+  },
+  "turn_off": {
+    "message": "ለማጥፋት ጠቅ ያድርጉ"
+  },
+  "turn_off_description": {
+    "message": "ጽሑፍ በተመረጠ ቁጥር የትርጉም ቁልፍ ብቅ ይላል።"
+  },
+  "turn_on": {
+    "message": "ለማብራት ጠቅ ያድርጉ"
+  },
+  "turn_on_description": {
+    "message": "ጽሁፍ ሲመረጥ የትርጉም ቁልፍ አይታይም ነገር ግን አሁንም በመሳሪያ አሞሌ ውስጥ ያለውን የፕሮ ትርጉም አዶን ጠቅ በማድረግ መተርጎም ይችላሉ።"
+  },
+  "settings": {
+    "message": "ቅንብሮች"
+  },
+  "general": {
+    "message": "አጠቃላይ"
+  },
+  "about": {
+    "message": "ስለ"
+  },
+  "privacy_policy": {
+    "message": "የ ግል የሆነ"
+  },
+  "ui_language": {
+    "message": "የዩአይ ቋንቋ"
+  },
+  "ui_language_description": {
+    "message": "ነባሪውን የዩአይ ቋንቋ ይምረጡ"
+  },
+  "target_language": {
+    "message": "የዒላማ ቋንቋ"
+  },
+  "target_language_description": {
+    "message": "ነባሪውን የዒላማ ቋንቋ ይምረጡ"
+  },
+  "auto_switch": {
+    "message": "በራስ-ሰር ወደ ሁለተኛው ዒላማ ቋንቋ ይቀይሩ"
+  },
+  "auto_switch_description": {
+    "message": "የተመረጠው ጽሑፍ ነባሪው የዒላማ ቋንቋ ሲሆን ወደ ሁለተኛው የዒላማ ቋንቋ ይተርጉሙት"
+  },
+  "second_target_language": {
+    "message": "ሁለተኛ ዒላማ ቋንቋ"
+  },
+  "second_target_language_description": {
+    "message": "ነባሪውን ሁለተኛ ዒላማ ቋንቋ ይምረጡ"
+  },
+  "target_format": {
+    "message": "የዒላማ ቅርጸት"
+  },
+  "target_format_description": {
+    "message": "ነባሪውን የዒላማ ቅርጸት ይምረጡ፣ ቅርጸት በትርጉም ፓነል ውስጥ ሊቀየር ይችላል።"
+  },
+  "auto_set_format": {
+    "message": "ነባሪ ቅርጸትን በራስ-ሰር ያቀናብሩ"
+  },
+  "auto_set_format_description": {
+    "message": "በትርጉም ፓነል ውስጥ ቅርጸት ሲቀይሩ የተመረጠውን ቅርጸት ወደ ነባሪ ቅርጸት ያዘጋጁ"
+  },
+  "format_and_order": {
+    "message": "የትርጉም ፓነል ቅርጸት እና ቅደም ተከተል"
+  },
+  "format_and_order_description": {
+    "message": "በትርጉም ፓነል እና በማሳያ ቅደም ተከተል ውስጥ ሊለወጡ የሚችሉ ጉዳዮችን ይቅረጹ"
+  },
+  "translate_button_on": {
+    "message": "የትርጉም ቁልፍን አሳይ"
+  },
+  "translate_button_on_description": {
+    "message": "ጽሑፍ በተመረጠ ቁጥር የትርጉም ቁልፍ ብቅ ይላል።"
+  },
+  "translate_button_off": {
+    "message": "የትርጉም ቁልፍ አታሳይ"
+  },
+  "translate_button_off_description": {
+    "message": "ጽሁፍ ሲመረጥ የትርጉም ቁልፍ አይታይም ነገር ግን አሁንም በመሳሪያ አሞሌ ውስጥ ያለውን የፕሮ ትርጉም አዶን ጠቅ በማድረግ መተርጎም ይችላሉ።"
+  }
+}

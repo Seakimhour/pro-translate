@@ -8,6 +8,7 @@ const defaultSettings = {
   targetFormat: "camel",
   autoSetFormat: true,
   showIcon: true,
+  uiLanguage: "en",
   cases: formatCases.map((c) => c.name),
 };
 
