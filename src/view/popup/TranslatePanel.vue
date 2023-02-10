@@ -29,7 +29,8 @@
 
 <script>
 import { getMessages } from "../../js/localization.js";
-import { translateAPI, detectLanguage } from "../../js/translate.js";
+import { translateAPI } from "../../js/translate.js";
+import { detectLanguage } from "../../js/detect-language.js";
 import { getSettings, setSettings } from "../../js/settings.js";
 import FormatSection from "./TranslatePanel/FormatSection.vue";
 
