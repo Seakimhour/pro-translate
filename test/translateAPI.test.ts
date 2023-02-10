@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { translateAPI } from "../src/js/translate.js";
+import { translateAPI } from "src/js/translate.js";
 
 test("Translate API", async () => {
   let translateText = await translateAPI("test", "en", "ja");
