@@ -64,7 +64,7 @@ export default {
       this.messages = await getMessages(this.messages);
       await this.translate();
       await this.initFormat();
-      this.initPanel();
+      await this.initPanel();
       this.initCompleted = true;
     },
     async translate() {
@@ -102,9 +102,9 @@ export default {
         if (response[0]) this.formatText = response[0][0][0];
       }
     },
-    initPanel() {
-      const translationPanel = document.getElementById(
-        "pro-traslate-translation-panel"
+    async initPanel() {
+      const translationPanel = await this.waitForElm(
+        "#pro-traslate-translation-panel"
       );
 
       this.panelSize = {
@@ -159,8 +159,27 @@ export default {
       this.settings.targetFormat = targetFormat;
       await setSettings(this.settings);
     },
+    waitForElm(selector) {
+      return new Promise((resolve) => {
+        if (document.querySelector(selector)) {
+          return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(() => {
+          if (document.querySelector(selector)) {
+            resolve(document.querySelector(selector));
+            observer.disconnect();
+          }
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+      });
+    },
   },
-  created() {
+  mounted() {
     this.initialize();
   },
 };
