@@ -4,7 +4,7 @@
       v-if="!showTranslatePanel"
       :selectedPosition="selectedPosition"
       :selectedDirection="selectedDirection"
-      @translate="showTranslatePanel = true"
+      @click="this.showTranslatePanel = true"
     />
     <TranslatePanel
       v-else
