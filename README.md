@@ -7,30 +7,51 @@ Translate selected text on the web page and convert to specified format.
 - Auto detect language and translate to target language.
 - Convert english text to specified format use in programming.
 
-## Recommended IDE Setup
+## Install
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Manually
 
-## Project Setup
+Clone this repository
+```sh
+git clone https://github.com/Seakimhour/pro-translate.git
+```
 
+Install dependency
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+Compile output
+```sh
+npm run prod
+```
 
+Load extension to Chrome
+1. go to `chrome://extensions`
+2. Enable Developer mode
+3. click on `Load unpacked` button
+4. upload `src` folder inside `dist` folder that has been created after compile
+
+### Chrome Store
+
+Install extension from [Chrome Store](https://chrome.google.com/webstore/detail/ggbiakgkfnpekepnjlocbbhmlcbfmfai)
+
+## Development Setup
+
+Clone this repository
+```sh
+git clone https://github.com/Seakimhour/pro-translate.git
+```
+
+Install dependency
+```sh
+npm install
+```
+
+Compile Watch
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+## Recommended tool
+- [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid)
