@@ -4,7 +4,6 @@
       :src="iconPath"
       :style="imageSize"
       class="box-content cursor-pointer rounded-sm border bg-white p-px shadow hover:border-gray-400 hover:shadow-md"
-      @click="$emit('translate')"
     />
   </div>
 </template>

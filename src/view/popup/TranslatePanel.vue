@@ -11,11 +11,11 @@
   >
     <div class="text-left">
       <p class="text-xs text-gray-400">{{ messages.selected_text }}</p>
-      <p>{{ selectedText }}</p>
+      <p class="text-base">{{ selectedText }}</p>
     </div>
     <div class="text-left">
       <p class="text-xs text-gray-400">{{ messages.translated_text }}</p>
-      <p>{{ translatedText }}</p>
+      <p class="text-base">{{ translatedText }}</p>
     </div>
     <FormatSection
       v-if="settings"
