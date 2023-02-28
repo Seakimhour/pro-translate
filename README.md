@@ -30,7 +30,7 @@ Load extension to Chrome
 1. go to `chrome://extensions`
 2. Enable Developer mode
 3. click on `Load unpacked` button
-4. upload `src` folder inside `dist` folder that has been created after compile
+4. upload `dist` folder inside project folder that has created after compile
 
 ### Chrome Store
 
