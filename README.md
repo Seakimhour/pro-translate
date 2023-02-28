@@ -1,6 +1,17 @@
-# pro-translate
+<h1 align="center">
+  <br>
+  <a href="https://seakimhour.github.io/pro-translate"><img src="src\assets\icons\450.png" alt="Pro Translate" width="150"></a>
+  <br>Pro Translate<br>
+</h1>
 
-Translate selected text on the web page and convert to specified format.
+<h4 align="center">Translate selected text on the web page and convert to specified format.</h4>
+
+<p align="center">
+  <a href="#features">Features</a> •
+  <a href="#install">Install</a> •
+  <a href="#development-setup">Development Setup</a> •
+  <a href="#recommended-tool">Recommended Tool</a>
+</p>
 
 ## Features
 
@@ -53,5 +64,5 @@ Compile Watch
 npm run dev
 ```
 
-## Recommended tool
+## Recommended Tool
 - [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid)
