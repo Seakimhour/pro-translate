@@ -28,3 +28,4 @@ coverage
 *.sw?
 
 src/css/output.css
+/zip

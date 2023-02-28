@@ -22,7 +22,7 @@ chromeName.forEach((name) => {
   pages[fileName] = {
     entry: `src/entry/${name}`,
     template: "public/index.html",
-    filename: `src/${fileName}.html`,
+    filename: `${fileName}.html`,
   };
 });
 
@@ -37,11 +37,11 @@ module.exports = {
         patterns: [
           {
             from: path.resolve(`src/manifest.json`),
-            to: `${path.resolve("dist/src")}/manifest.json`,
+            to: `${path.resolve("dist")}/manifest.json`,
           },
           {
             from: path.resolve(`src/assets/`),
-            to: `${path.resolve("dist/src")}/`,
+            to: `${path.resolve("dist")}/`,
           },
         ],
       },
@@ -49,8 +49,8 @@ module.exports = {
   },
   configureWebpack: {
     output: {
-      filename: `src/[name].js`,
-      chunkFilename: `src/[name].js`,
+      filename: `[name].js`,
+      chunkFilename: `[name].js`,
     },
     devtool: isDevMode ? "inline-source-map" : false,
   },
