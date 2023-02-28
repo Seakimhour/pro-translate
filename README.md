@@ -45,7 +45,9 @@ Load extension to Chrome
 
 ### Chrome Store
 
-Install extension from [Chrome Store](https://chrome.google.com/webstore/detail/ggbiakgkfnpekepnjlocbbhmlcbfmfai)
+Install extension from [Chrome Store](https://chrome.google.com/webstore/detail/pro-translate/ggbiakgkfnpekepnjlocbbhmlcbfmfai)
+
+<a href="https://chrome.google.com/webstore/detail/pro-translate/ggbiakgkfnpekepnjlocbbhmlcbfmfai"><img src="src\img\chrome-store-border.png" alt="Chrome Store" width="230"></a>
 
 ## Development Setup
 
