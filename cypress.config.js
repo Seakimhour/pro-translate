@@ -1,16 +1,16 @@
 const { defineConfig } = require("cypress");
+const path = require('path');
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
-  },
+      on("before:browser:launch", (browser, launchOptions) => {
+        launchOptions.extensions.push(path.resolve(__dirname, "dist"))
 
-  component: {
-    devServer: {
-      framework: "vue-cli",
-      bundler: "webpack",
+        return launchOptions;
+      });
     },
-  },
+    specPattern: "test/e2e/**/*.cy.{js,jsx,ts,tsx}",
+    supportFile: "test/support/e2e.{js,jsx,ts,tsx}"
+  }
 });
