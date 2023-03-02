@@ -16,9 +16,5 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
   },
-  overrides: [
-    {
-      excludedFiles: "*.cy.js",
-    }
-  ]
+  ignorePatterns: ["*.cy.js"],
 };
