@@ -17,6 +17,20 @@
 
 - Auto detect language and translate to target language.
 - Convert english text to specified format use in programming.
+- Use [Change Case](https://github.com/blakeembrey/change-case)
+
+| Format Case | Example |
+| --- | --- |
+| snake | test_string |
+| param | test-string |
+| camel | testString |
+| pascal | TestString |
+| path | test/string |
+| constant | TEST_STRING |
+| dot | test.string |
+| header | Test-String |
+| lower | test string |
+| capital | Test String |
 
 ## Install
 
