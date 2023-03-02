@@ -28,5 +28,4 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run prod
-    - run: npm run vite & wait-on http://127.0.0.1:5173/
-    - run: npm run cy:run
+    - run: npm run vite & npm run cy:run
