@@ -11,8 +11,9 @@
     "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development",
     "css-watch": "tailwindcss -i ./src/css/style.css -o ./src/css/output.css --watch",
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "test": "vitest",
-    "zip": "zip-build ./dist ./zip"
+    "zip": "zip-build ./dist ./zip",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --headed"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
@@ -20,6 +21,8 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "change-case": "^4.1.2",
     "copy-webpack-plugin": "^11.0.0",
+    "cypress": "^12.7.0",
+    "cypress-real-events": "^1.7.6",
     "eslint": "^8.22.0",
     "eslint-plugin-tailwindcss": "^3.7.1",
     "eslint-plugin-vue": "^9.3.0",
@@ -31,6 +34,7 @@
     "vue": "^3.2.47",
     "vue-cli-plugin-chrome-extension-cli": "^1.1.4",
     "vue-loader": "^17.0.1",
+    "wait-on": "^7.0.1",
     "webextension-polyfill": "^0.10.0",
     "zip-build": "^1.8.0"
   },

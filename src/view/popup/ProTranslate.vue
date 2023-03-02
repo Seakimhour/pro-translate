@@ -1,19 +1,17 @@
 <template>
-  <Transition name="fade">
-    <TranslateButton
-      v-if="!showTranslatePanel"
-      :selectedPosition="selectedPosition"
-      :selectedDirection="selectedDirection"
-      @click="this.showTranslatePanel = true"
-    />
-    <TranslatePanel
-      v-else
-      :selectedPosition="selectedPosition"
-      :selectedDirection="selectedDirection"
-      :selectedText="selectedText"
-      :onToolbar="onToolbar"
-    />
-  </Transition>
+  <TranslateButton
+    v-show="!showTranslatePanel"
+    :selectedPosition="selectedPosition"
+    :selectedDirection="selectedDirection"
+    @click="showTranslatePanel = true"
+  />
+  <TranslatePanel
+    v-show="showTranslatePanel"
+    :selectedPosition="selectedPosition"
+    :selectedDirection="selectedDirection"
+    :selectedText="selectedText"
+    :onToolbar="onToolbar"
+  />
 </template>
 
 <script>
