@@ -36,9 +36,7 @@ describe("Select text popup", () => {
       ]);
     cy.contains("Privacy Policy").realMouseUp({ position: "center" });
     cy.get("#pro-translate div img").realClick({ position: "center" });
-    cy.get("#pro-traslate-translation-panel")
-      .should("exist")
-      .and("contain", "プライバシーポリシー");
+    cy.get(':nth-child(2) > .text-base').should("contain", "プライバシーポリシー");
 
     cy.contains("snake").realClick({ position: "center" });
     cy.get("input").should("have.value", "privacy_policy");
