@@ -28,5 +28,4 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run prod
-    - run: npm run vite
-    - run: npm run cy:run
+    - run: npm run vite & npm run cy:run

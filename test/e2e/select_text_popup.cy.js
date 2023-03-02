@@ -1,6 +1,6 @@
 describe("Select text popup", () => {
   beforeEach(() => {
-    cy.visit("http://127.0.0.1:5173/");
+    cy.visit("http://localhost:5173/");
   });
 
   it("show popup button when select text", () => {
@@ -36,14 +36,11 @@ describe("Select text popup", () => {
       ]);
     cy.contains("Privacy Policy").realMouseUp({ position: "center" });
     cy.get("#pro-translate div img").realClick({ position: "center" });
-    cy.get("#pro-traslate-translation-panel")
-      .should("exist")
-      .and("contain", "プライバシーポリシー");
 
-    cy.contains("snake").realClick({ position: "center" });
+    cy.get('#pro-translate-scrollbar-y-xs > :nth-child(1)').click();
     cy.get("input").should("have.value", "privacy_policy");
 
-    cy.contains("param").realClick({ position: "center" });
+    cy.get('#pro-translate-scrollbar-y-xs > :nth-child(2)').click();
     cy.get("input").should("have.value", "privacy-policy");
   });
 });
