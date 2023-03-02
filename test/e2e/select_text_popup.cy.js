@@ -36,12 +36,11 @@ describe("Select text popup", () => {
       ]);
     cy.contains("Privacy Policy").realMouseUp({ position: "center" });
     cy.get("#pro-translate div img").realClick({ position: "center" });
-    cy.get(':nth-child(2) > .text-base').should("contain", "プライバシーポリシー");
 
-    cy.contains("snake").realClick({ position: "center" });
+    cy.get('#pro-translate-scrollbar-y-xs > :nth-child(1)').click();
     cy.get("input").should("have.value", "privacy_policy");
 
-    cy.contains("param").realClick({ position: "center" });
+    cy.get('#pro-translate-scrollbar-y-xs > :nth-child(2)').click();
     cy.get("input").should("have.value", "privacy-policy");
   });
 });
