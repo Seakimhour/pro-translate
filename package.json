@@ -34,7 +34,6 @@
     "vue": "^3.2.47",
     "vue-cli-plugin-chrome-extension-cli": "^1.1.4",
     "vue-loader": "^17.0.1",
-    "wait-on": "^7.0.1",
     "webextension-polyfill": "^0.10.0",
     "zip-build": "^1.8.0"
   },
