@@ -13,7 +13,7 @@
     "lint": "eslint . --ext .vue,.js,.ts,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "zip": "zip-build ./dist ./zip",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --headed"
+    "cy:run": "cypress run --headed --browser chrome"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
