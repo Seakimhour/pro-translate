@@ -597,9 +597,9 @@ video {
   background-image: linear-gradient(to top left, var(--tw-gradient-stops));
 }
 
-.from-primary {
-  --tw-gradient-from: #539E8A;
-  --tw-gradient-to: rgb(83 158 138 / 0);
+.from-\[\#e4faf4\] {
+  --tw-gradient-from: #E4FAF4;
+  --tw-gradient-to: rgb(228 250 244 / 0);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -640,9 +640,9 @@ video {
   line-height: 28px;
 }
 
-.text-xs {
-  font-size: 12px;
-  line-height: 16px;
+.text-sm {
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .font-bold {
