@@ -32,6 +32,11 @@
 | lower | test string |
 | capital | Test String |
 
+## Tech
+- Front-End: VueJs, Tailwind
+- Back-End: WebExtension Polyfill
+- Test: Cypress, Vite
+
 ## Install
 
 ### Manually
